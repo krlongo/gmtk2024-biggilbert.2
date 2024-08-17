@@ -31,7 +31,6 @@ public class PlayerBehavior : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         defaultPosition = rb2d.position;
         Reset();
-        HealthComponent.OnDie += Die;
     } 
 
     // Update is called once per frame
@@ -171,14 +170,16 @@ public class PlayerBehavior : MonoBehaviour
         defaultPosition = rb2d.position;
     }
 
-    /*public void OnDisable()
+    // Remove event listener OnDisable
+    public void OnDisable()
     {
         HealthComponent.OnDie -= Die;
     }
 
+    // Add event listener OnEnable
     public void OnEnable()
     {
         HealthComponent.OnDie += Die;
-    }*/
+    }
 
 }

@@ -30,6 +30,6 @@ public class HUD : MonoBehaviour
     // TODO: Trigger Game Over screen
     private void PlayerDied()
     {
-        Debug.Log("Player is dead");
+        Debug.Log("Game Over");
     }
 }

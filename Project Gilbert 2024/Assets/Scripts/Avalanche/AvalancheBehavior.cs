@@ -56,8 +56,6 @@ public class AvalancheBehavior : MonoBehaviour
     {
         rb2d.velocity = Vector3.zero;
         rb2d.gravityScale = 0;
-        rb2d.angularDrag = 0;
-        Debug.Log(rb2d.velocity);
     }
 
 
