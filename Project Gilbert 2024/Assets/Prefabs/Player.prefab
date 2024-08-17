@@ -266,6 +266,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDeadTemp: 0
+  onPlayerDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4316220382692951760
 MonoBehaviour:
   m_ObjectHideFlags: 0

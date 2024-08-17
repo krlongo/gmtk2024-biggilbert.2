@@ -12,6 +12,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Avalanche!
       objectReference: {fileID: 0}
+    - target: {fileID: 3970983962428793657, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4941581000054573663, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4941581000054573663, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1537364125
+      objectReference: {fileID: 0}
     - target: {fileID: 7291558067170254831, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -30,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7291558067170254831, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7291558067170254831, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
       propertyPath: m_LocalRotation.w
