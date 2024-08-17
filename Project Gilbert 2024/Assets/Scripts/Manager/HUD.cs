@@ -13,15 +13,27 @@ public class HUD : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {   
-        HealthComponent.OnDie += PlayerDied;
-        HealthComponent.OnAdjustHealth += UpdateHealth;
-        PlayerBehavior.OnTrashChange += UpdateTrashAmount;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private void OnEnable()
+    {
+        HealthComponent.OnDie += PlayerDied;
+        HealthComponent.OnAdjustHealth += UpdateHealth;
+        PlayerBehavior.OnTrashChange += UpdateTrashAmount;
+    }
+
+    private void OnDisable()
+    {
+        HealthComponent.OnDie -= PlayerDied;
+        HealthComponent.OnAdjustHealth -= UpdateHealth;
+        PlayerBehavior.OnTrashChange -= UpdateTrashAmount;
     }
 
     private void UpdateHealth()
