@@ -13,6 +13,7 @@ public class PlayerData : ScriptableObject
     public float maxStamina;
     public float currentStamina;
     public List<ItemData> items;
+    public int trashAmount;
     public bool isDead;
     public bool isInvicible;
 }

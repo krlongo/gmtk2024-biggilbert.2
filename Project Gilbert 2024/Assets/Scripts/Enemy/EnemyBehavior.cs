@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,10 @@ public class EnemyBehavior : MonoBehaviour
     public float fireRate = 5000f; // fire every 5 seconds
     public float shotPower = 20f; //force of bullet
 
+    public EnemyData enemyData;
+    public Action OnDie;
+
+    public GameObject trash;
 
     private void Awake()
     {
@@ -37,6 +42,23 @@ public class EnemyBehavior : MonoBehaviour
             rb.rotation = angle; // set rotation
             moveDirection = direction; // now we have our path
         }
+    }
+
+    public void DecreaseHealth(int damage)
+    {
+        enemyData.currentHealth = enemyData.currentHealth - damage;
+
+        if (enemyData.currentHealth <= 0)
+        {
+            OnDie?.Invoke();
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        Instantiate(trash, gameObject.transform.position, Quaternion.identity);
+        Destroy(this.gameObject);
     }
 
     private void FixedUpdate()
