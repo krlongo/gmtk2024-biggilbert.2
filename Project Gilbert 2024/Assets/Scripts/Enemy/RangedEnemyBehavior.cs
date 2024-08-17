@@ -17,6 +17,11 @@ public class RangedEnemyBehavior : MonoBehaviour
 
     private float shootingTime; // for testing fire rate (local variable)
 
+    public EnemyData enemyData;
+    public Action OnDie;
+
+    public GameObject trash;
+
 
     private void Awake()
     {
@@ -54,6 +59,23 @@ public class RangedEnemyBehavior : MonoBehaviour
             Vector3 direction = (target.position - transform.position).normalized; //get the direction to the target
             projectile.GetComponent<Rigidbody2D>().velocity = direction * shotPower; //shoot the bullet
         }
+    }
+
+    public void DecreaseHealth(int damage)
+    {
+        enemyData.currentHealth = enemyData.currentHealth - damage;
+
+        if (enemyData.currentHealth <= 0)
+        {
+            OnDie?.Invoke();
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        Instantiate(trash, gameObject.transform.position, Quaternion.identity);
+        Destroy(this.gameObject);
     }
 
     private void FixedUpdate()

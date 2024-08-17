@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.XR;
@@ -24,6 +25,8 @@ public class PlayerBehavior : MonoBehaviour
     [Header("Climbing")]
     public bool isClimbing = false;
     public bool canClimb;
+
+    public static Action OnTrashChange;
 
     // Start is called before the first frame update
     void Start()
@@ -119,6 +122,12 @@ public class PlayerBehavior : MonoBehaviour
             {
                 canClimb = true;
                 Debug.Log("can climb");
+            }
+            else if (collision.gameObject.CompareTag("Trash"))
+            {
+                int trashValue = collision.gameObject.GetComponent<Trash>().value;
+                playerData.trashAmount += trashValue;
+                OnTrashChange.Invoke();
             }
         }
     }

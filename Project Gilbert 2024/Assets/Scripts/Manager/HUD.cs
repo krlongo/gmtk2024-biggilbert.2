@@ -8,12 +8,12 @@ public class HUD : MonoBehaviour
 {
     public PlayerData playerData;
     public TMP_Text healthText;
+    public TMP_Text trashAmountText;
 
     // Start is called before the first frame update
     void Start()
     {   
-        HealthComponent.OnDie += PlayerDied;
-        HealthComponent.OnAdjustHealth += UpdateHealth;
+        
     }
 
     // Update is called once per frame
@@ -22,9 +22,28 @@ public class HUD : MonoBehaviour
         
     }
 
+    private void OnEnable()
+    {
+        HealthComponent.OnDie += PlayerDied;
+        HealthComponent.OnAdjustHealth += UpdateHealth;
+        PlayerBehavior.OnTrashChange += UpdateTrashAmount;
+    }
+
+    private void OnDisable()
+    {
+        HealthComponent.OnDie -= PlayerDied;
+        HealthComponent.OnAdjustHealth -= UpdateHealth;
+        PlayerBehavior.OnTrashChange -= UpdateTrashAmount;
+    }
+
     private void UpdateHealth()
     {
         healthText.text = "Health: " + playerData.currentHealth;
+    }
+
+    private void UpdateTrashAmount()
+    {
+        trashAmountText.text = "Trash: " + playerData.trashAmount;
     }
 
     // TODO: Trigger Game Over screen
@@ -32,4 +51,5 @@ public class HUD : MonoBehaviour
     {
         Debug.Log("Game Over");
     }
+
 }
