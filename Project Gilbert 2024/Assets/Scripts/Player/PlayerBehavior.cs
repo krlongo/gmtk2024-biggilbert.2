@@ -7,14 +7,18 @@ public class PlayerBehavior : MonoBehaviour
 {
     private Rigidbody2D rb2d;
 
-    private float Move;
+    [Header("Movement")]
+    private float horizontal;
+    private float vertical;
     public float MoveSpeed;
 
+    [Header("Jumping")]
     public float jumpForce;
     public int numOfJumps;
 
     [Header("Climbing")]
-    public bool isClimbing;
+    public bool isClimbing = false;
+    public bool canClimb;
 
     // Start is called before the first frame update
     void Start()
@@ -25,13 +29,28 @@ public class PlayerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move = Input.GetAxis("Horizontal");
+        horizontal = Input.GetAxis("Horizontal");
+        vertical = Input.GetAxis("Vertical");
 
-        rb2d.velocity = new Vector2(Move * MoveSpeed, rb2d.velocity.y);
-        
+        if(isClimbing)
+        {
+            rb2d.velocity = new Vector2(horizontal * MoveSpeed, vertical * MoveSpeed);
+        }
+        else
+        {
+            rb2d.velocity = new Vector2(horizontal * MoveSpeed, rb2d.velocity.y);
+        }
 
-        if(Input.GetKeyDown(KeyCode.Space)) 
+        if (Input.GetKeyDown(KeyCode.Space)) 
         { 
+            if(isClimbing)
+            {
+                canClimb = false;
+                isClimbing = false;
+                rb2d.gravityScale = 1;
+                isClimbing = false;
+                rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
+            }
             //if(numOfJumps > 0)
             {
                 rb2d.velocity = Vector2.zero;
@@ -39,9 +58,26 @@ public class PlayerBehavior : MonoBehaviour
                 numOfJumps--;
             }
         }
+
         if(Input.GetKeyDown(KeyCode.Mouse1))
         {
+            if(!isClimbing && canClimb)
+            {
+                rb2d.gravityScale = 0;
+                rb2d.velocity = Vector2.zero;
+                isClimbing = true;
+            }
+        }
 
+        if(Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            if(isClimbing)
+            {
+                rb2d.gravityScale = 1;
+                isClimbing = false;
+                rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
+
+            }
         }
     }
 
@@ -66,4 +102,37 @@ public class PlayerBehavior : MonoBehaviour
             return false;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision != null)
+        {
+            if(collision.gameObject.CompareTag("Climbable"))
+            {
+                canClimb = true;
+                Debug.Log("can climb");
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision != null)
+        {
+            if (collision.gameObject.CompareTag("Climbable"))
+            {
+                if(isClimbing)
+                {
+                    rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
+                }
+                canClimb = false;
+                isClimbing = false;
+                rb2d.gravityScale = 1;
+                isClimbing = false;
+                Debug.Log("cannot climb");
+            }
+        }
+    }
+
+
 }
