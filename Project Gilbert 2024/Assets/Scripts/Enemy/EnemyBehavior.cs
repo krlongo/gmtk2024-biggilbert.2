@@ -15,6 +15,8 @@ public class EnemyBehavior : MonoBehaviour
     public float shotPower = 20f; //force of bullet
 
     public EnemyData enemyData;
+
+    // Might not be necessary, unsure if any other classes will need to listen for enemy death
     public Action OnDie;
 
     public GameObject trash;
