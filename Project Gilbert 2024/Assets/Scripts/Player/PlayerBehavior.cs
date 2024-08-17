@@ -146,4 +146,8 @@ public class PlayerBehavior : MonoBehaviour
         rb2d.position = defaultPosition;
     }
 
+    public void OnCheckpoint(){
+        defaultPosition = rb2d.position;
+    }
+
 }
