@@ -49,4 +49,18 @@ public class AvalancheBehavior : MonoBehaviour
             return false;
         }
     }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision != null)
+        {
+            if(collision.gameObject.CompareTag("Player"))
+            {
+                collision.gameObject.GetComponent<HealthComponent>().isDeadTemp = true;
+                Debug.Log("Player Dead!");
+            }
+        }
+    }
+    
 }
