@@ -6,6 +6,9 @@ using UnityEngine;
 public class PlayerBehavior : MonoBehaviour
 {
     private Rigidbody2D rb2d;
+    public PlayerData playerData;
+
+    // TODO: Link some values below with values in playerData so it's accessible via other classes if necessary
 
     [Header("Movement")]
     private float horizontal;
@@ -28,12 +31,13 @@ public class PlayerBehavior : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         defaultPosition = rb2d.position;
         Reset();
-    }
-    
+    } 
 
     // Update is called once per frame
     void Update()
     {
+        // Don't allow movement if player is dead (likely better way to do this to stop update call)
+        if (playerData.isDead) return;
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
 
@@ -138,16 +142,44 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 
+    public void Die()
+    {
+        rb2d.velocity = Vector2.zero;
+        rb2d.gravityScale = 0;
+        Debug.Log("Player dead");
+    }
+
+    // Reset all playerData to default values (maybe should be moved to different higher level class ?)
+    public void ResetPlayerData()
+    {
+        playerData.maxHealth = 3;
+        playerData.currentHealth = 3;
+        playerData.isDead = false;
+    }
+
     void DeathLoop(){
         Reset();
     }
 
     public void Reset(){
         rb2d.position = defaultPosition;
+        ResetPlayerData();
     }
 
     public void OnCheckpoint(){
         defaultPosition = rb2d.position;
+    }
+
+    // Remove event listener OnDisable
+    public void OnDisable()
+    {
+        HealthComponent.OnDie -= Die;
+    }
+
+    // Add event listener OnEnable
+    public void OnEnable()
+    {
+        HealthComponent.OnDie += Die;
     }
 
 }

@@ -265,8 +265,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 447593619e965a040806f7922e2e98c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: a0b93f7a1d868e344977251b76ecdae9, type: 2}
   isDeadTemp: 0
   onPlayerDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayerCheckpoint:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &4316220382692951760
