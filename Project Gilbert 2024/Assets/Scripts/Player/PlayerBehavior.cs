@@ -16,6 +16,8 @@ public class PlayerBehavior : MonoBehaviour
     public float jumpForce;
     public int numOfJumps;
 
+    private Vector3 defaultPosition;
+
     [Header("Climbing")]
     public bool isClimbing = false;
     public bool canClimb;
@@ -24,7 +26,10 @@ public class PlayerBehavior : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        defaultPosition = rb2d.position;
+        Reset();
     }
+    
 
     // Update is called once per frame
     void Update()
@@ -102,7 +107,6 @@ public class PlayerBehavior : MonoBehaviour
             return false;
         }
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision != null)
@@ -134,5 +138,12 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 
+    void DeathLoop(){
+        Reset();
+    }
+
+    public void Reset(){
+        rb2d.position = defaultPosition;
+    }
 
 }
