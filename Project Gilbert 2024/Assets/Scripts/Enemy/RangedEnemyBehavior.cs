@@ -1,17 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBehavior : MonoBehaviour
+public class RangedEnemyBehavior : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 5f; // adjustable enemy speed
+    [SerializeField] float moveSpeed = 0f; // adjustable enemy speed
     Rigidbody2D rb; // initialize rigidbody
     Transform target; // set to chase the player
+    Transform self; // set to shoot from current location
     Vector2 moveDirection; // logic for moving enemy to player
 
     public GameObject bullet; // bullet prefab
     public float fireRate = 5000f; // fire every 5 seconds
-    public float shotPower = 20f; //force of bullet
+    public float shotPower = 5f; //force of bullet
+
+    private float shootingTime; // for testing fire rate (local variable)
 
 
     private void Awake()
@@ -23,19 +27,32 @@ public class EnemyBehavior : MonoBehaviour
     void Start()
     {
         target = GameObject.Find("Player").transform; // initialize target to Player
-
-
+        self = GameObject.Find("RangedEnemy").transform; // initialize self to rangedEnemy shooting
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(target)
+        if (target)
         {
+            Shoot(); // set to fire continuously
             Vector3 direction = (target.position - transform.position).normalized; // direction to player
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // adjust angle of enemy
             rb.rotation = angle; // set rotation
             moveDirection = direction; // now we have our path
+        }
+    }
+
+    private void Shoot()
+    {
+        if (Time.time > shootingTime)
+        {
+            Debug.Log("Entered Shoot function assuming prerequisite");
+            shootingTime = Time.time + fireRate / 1000; //set the local var. to current time of shooting
+            Vector2 myPos = new Vector2(self.position.x, self.position.y); //our curr position is where our muzzle points
+            GameObject projectile = Instantiate(bullet, myPos, Quaternion.identity); //create our bullet
+            Vector3 direction = (target.position - transform.position).normalized; //get the direction to the target
+            projectile.GetComponent<Rigidbody2D>().velocity = direction * shotPower; //shoot the bullet
         }
     }
 
