@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HealthComponent : MonoBehaviour
 {
+    public bool isDeadTemp;
+
     // Start is called before the first frame update
     void Start()
     {
