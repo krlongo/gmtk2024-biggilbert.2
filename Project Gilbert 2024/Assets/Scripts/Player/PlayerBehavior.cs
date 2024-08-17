@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.XR;
 using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour
@@ -11,6 +12,9 @@ public class PlayerBehavior : MonoBehaviour
 
     public float jumpForce;
     public int numOfJumps;
+
+    [Header("Climbing")]
+    public bool isClimbing;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +38,10 @@ public class PlayerBehavior : MonoBehaviour
                 rb2d.AddForce(new Vector2(rb2d.velocity.x, jumpForce));
                 numOfJumps--;
             }
+        }
+        if(Input.GetKeyDown(KeyCode.Mouse1))
+        {
+
         }
     }
 
