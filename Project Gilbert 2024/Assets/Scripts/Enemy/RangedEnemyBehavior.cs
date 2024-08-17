@@ -52,7 +52,6 @@ public class RangedEnemyBehavior : MonoBehaviour
     {
         if (Time.time > shootingTime)
         {
-            Debug.Log("Entered Shoot function assuming prerequisite");
             shootingTime = Time.time + fireRate / 1000; //set the local var. to current time of shooting
             Vector2 myPos = new Vector2(self.position.x, self.position.y); //our curr position is where our muzzle points
             GameObject projectile = Instantiate(bullet, myPos, Quaternion.identity); //create our bullet
