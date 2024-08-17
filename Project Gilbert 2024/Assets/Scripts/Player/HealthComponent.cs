@@ -47,6 +47,7 @@ public class HealthComponent : MonoBehaviour
     public void AdjustHealth (int incomingHealth)
     {
         playerData.currentHealth += incomingHealth;
+        Debug.Log(playerData.currentHealth); // for testing health being lowered
         if (playerData.currentHealth > playerData.maxHealth)
         {
             playerData.currentHealth = playerData.maxHealth;
