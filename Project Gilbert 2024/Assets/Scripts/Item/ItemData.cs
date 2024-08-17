@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class Item : ScriptableObject
+public class ItemData : ScriptableObject
 {
-    public string name;
+    public string itemName;
     public string description;
-    public itemModifier modifier;
+    public ItemModifier modifier;
 }

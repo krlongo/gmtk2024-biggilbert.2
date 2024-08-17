@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerData : MonoBehaviour
+public class PlayerData : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int maxHealth;
+    public int currentHealth;
+    public Vector2 currentPosition;
+    public float jumpHeight;
+    public float movementSpeed;
+    public float maxStamina;
+    public float currentStamina;
+    public List<ItemData> items;
+    public bool isDead;
+    public bool isInvicible;
 }
