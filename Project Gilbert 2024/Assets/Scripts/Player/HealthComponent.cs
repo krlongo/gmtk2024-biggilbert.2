@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine.Events;
 
 public class HealthComponent : MonoBehaviour
 {
-    public bool isDeadTemp;
+    public PlayerData playerData;
 
     /**The Unity Event... gosh what a doozy for something that should've been so simple.
     But alas, here we are.
@@ -21,6 +22,15 @@ public class HealthComponent : MonoBehaviour
     [Header("Here is checkpoint event")]
     public UnityEvent onPlayerCheckpoint;
 
+    /**
+     * I think it's likely easier to just use C# built in Actions for event handling so we
+     * don't have to make any adjustments in the inspector. This allows us to just invoke the
+     * action during some functions and then have listeners setup checking for when the action
+     * is invoked within the code. Seems easier to follow and fits what we're doing better IMO.
+     **/
+    public static Action OnDie;
+    public static Action OnAdjustHealth;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision != null)
@@ -33,6 +43,22 @@ public class HealthComponent : MonoBehaviour
         }
     }
 
+    // Adjust current Health based on incoming healing (positive incomingHealth) or damage (negative incomingHealth)
+    public void AdjustHealth (int incomingHealth)
+    {
+        playerData.currentHealth += incomingHealth;
+        if (playerData.currentHealth > playerData.maxHealth)
+        {
+            playerData.currentHealth = playerData.maxHealth;
+        }
+        OnAdjustHealth?.Invoke();
+        if (playerData.currentHealth <= 0)
+        {
+            playerData.isDead = true;
+            OnDie?.Invoke();
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,9 +68,8 @@ public class HealthComponent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isDeadTemp){
+        if (playerData.isDead){
             onPlayerDeath.Invoke();
-            isDeadTemp = false;
         }
     }
 }
