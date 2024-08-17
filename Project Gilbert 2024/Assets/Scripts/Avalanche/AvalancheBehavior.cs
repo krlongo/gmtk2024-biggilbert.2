@@ -33,28 +33,6 @@ public class AvalancheBehavior : MonoBehaviour
      
     }
 
-    public bool IsGrounded()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up * 2);
-
-        if(hit.collider != null)
-        {
-            Debug.Log(hit.collider.gameObject);
-            if(hit.collider.gameObject.CompareTag("Ground"))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        else
-        {
-            return false;
-        }
-    }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -85,4 +63,12 @@ public class AvalancheBehavior : MonoBehaviour
         Debug.Log(defaultPosition);
     }
     
+    public void OnCheckpoint(){
+
+        Vector3 tmpPos = rb2d.position;
+        tmpPos.y = tmpPos.y - 2; //how magical!
+        defaultPosition = rb2d.position;
+        defaultPosition = tmpPos;
+    }
+
 }
