@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8401856375500947189}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,3 +126,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  player: {fileID: 0}
+  playerFeet: {fileID: 0}
+  bullet: {fileID: 0}
+  fireRate: 5000
+  shotPower: 20
+  bounce: 0
+  enemyData: {fileID: 0}
+  trash: {fileID: 0}
