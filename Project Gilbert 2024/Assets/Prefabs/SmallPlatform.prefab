@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SmallPlatform
       objectReference: {fileID: 0}
+    - target: {fileID: 3970983962428793657, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7291558067170254831, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
       propertyPath: m_RootOrder
       value: 0
