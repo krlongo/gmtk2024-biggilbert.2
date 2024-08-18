@@ -5,10 +5,10 @@ using UnityEngine;
 public class CameraBehavior : MonoBehaviour
 {
     public Transform target;
-    public Vector3 offset = new Vector3(0, 3f, 0);
+    public Vector3 offset = new Vector3(0, 5f, 0);
 
-    public float camMovementOffsetUp = 0;
-    public float camMovementOffsetDown = 2;
+    public float camMovementOffsetUp = 1;
+    public float camMovementOffsetDown = 3;
 
     private Vector3 targetPosition;
 
