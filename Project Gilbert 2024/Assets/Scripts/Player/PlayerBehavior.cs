@@ -33,6 +33,9 @@ public class PlayerBehavior : MonoBehaviour
     public bool isClimbing = false;
     public bool canClimb;
 
+    [Header("Animation")]
+    private Animator animator;
+
     public static Action OnTrashChange;
 
     //powell shit
@@ -47,6 +50,7 @@ public class PlayerBehavior : MonoBehaviour
         // end of powell shit
 
         rb2d = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         defaultPosition = rb2d.position;
         Reset();
     }
@@ -74,19 +78,35 @@ public class PlayerBehavior : MonoBehaviour
 
         isGrounded = Physics2D.OverlapCircle(feetPos.position, .3f, groundMask);
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded) 
+        if(rb2d.velocity.y < 0)
         {
-            if(isClimbing)
+            animator.SetBool("isFalling", true);
+        }
+        else
+        {
+            animator.SetBool("isFalling", true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space)) 
+        {
+            if(isGrounded)
+            {
+                isJumping = true;
+                animator.SetBool("isJumping", true);
+                jumpTimeCounter = jumpTime;
+                rb2d.velocity = Vector2.zero;
+                rb2d.velocity = Vector2.up * jumpForce;
+                numOfJumps--;
+            }
+            else if (isClimbing)
             {
                 canClimb = false;
                 isClimbing = false;
                 rb2d.gravityScale = 1;
                 isClimbing = false;
                 rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
-            }
-            //if (numOfJumps > 0)
-            {
                 isJumping = true;
+                animator.SetBool("isJumping", true);
                 jumpTimeCounter = jumpTime;
                 rb2d.velocity = Vector2.zero;
                 rb2d.velocity = Vector2.up * jumpForce;
@@ -104,12 +124,15 @@ public class PlayerBehavior : MonoBehaviour
             else
             {
                 isJumping = false;
+                animator.SetBool("isJumping", false);
+
             }
         }
 
         if(Input.GetKeyUp(KeyCode.Space))
         {
             isJumping = false;
+            animator.SetBool("isJumping", false);
         }
 
         #region Climbing
@@ -117,8 +140,9 @@ public class PlayerBehavior : MonoBehaviour
         {
             if(isClimbing)
             {
-                rb2d.gravityScale = 1;
+                rb2d.gravityScale = 5;
                 isClimbing = false;
+                animator.SetBool("isClimbing", false);
                 rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
             }
 
@@ -132,6 +156,9 @@ public class PlayerBehavior : MonoBehaviour
                 rb2d.gravityScale = 0;
                 rb2d.velocity = Vector2.zero;
                 isClimbing = true;
+                isJumping = false;
+                animator.SetBool("isClimbing", true);
+
             }
         }
         #endregion
@@ -174,6 +201,7 @@ public class PlayerBehavior : MonoBehaviour
                 isClimbing = false;
                 rb2d.gravityScale = 5;
                 isClimbing = false;
+                animator.SetBool("isClimbing", false);
                 Debug.Log("cannot climb");
             }
         }
