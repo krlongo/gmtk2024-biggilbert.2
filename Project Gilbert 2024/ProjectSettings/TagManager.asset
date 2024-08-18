@@ -8,6 +8,8 @@ TagManager:
   - Avalanche!
   - Climbable
   - Checkpoint
+  - Enemy
+  - Feet
   layers:
   - Default
   - TransparentFX
