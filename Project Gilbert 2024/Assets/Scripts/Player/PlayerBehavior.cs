@@ -35,9 +35,17 @@ public class PlayerBehavior : MonoBehaviour
 
     public static Action OnTrashChange;
 
+    //powell shit
+    // public GameObject player; // access player
+    // end of powell shit
+
     // Start is called before the first frame update
     void Start()
     {
+        // powell shit
+        // player = GameObject.Find("Player");
+        // end of powell shit
+
         rb2d = GetComponent<Rigidbody2D>();
         defaultPosition = rb2d.position;
         Reset();
