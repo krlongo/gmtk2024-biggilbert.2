@@ -34,7 +34,7 @@ public class PlayerBehavior : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         defaultPosition = rb2d.position;
         Reset();
-    } 
+    }
 
     // Update is called once per frame
     void Update()
@@ -53,18 +53,19 @@ public class PlayerBehavior : MonoBehaviour
             rb2d.velocity = new Vector2(horizontal * MoveSpeed, rb2d.velocity.y);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)) 
-        { 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
             if(isClimbing)
             {
-                canClimb = false;
+                //canClimb = false;
                 isClimbing = false;
                 rb2d.gravityScale = 1;
                 isClimbing = false;
                 rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
-            }
-            //if(numOfJumps > 0)
-            {
+                isJumping = true;
+                animator.SetBool("isJumping", true);
+                animator.SetBool("isClimbing", false);
+                jumpTimeCounter = jumpTime;
                 rb2d.velocity = Vector2.zero;
                 rb2d.AddForce(new Vector2(rb2d.velocity.x, jumpForce));
                 numOfJumps--;
