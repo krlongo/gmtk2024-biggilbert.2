@@ -41,22 +41,7 @@ public class EnemyBehavior : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(moveSpeed * Time.deltaTime * Vector2.right);
-        RaycastHit2D groundCheck = Physics2D.Raycast(groundDetect.position, Vector2.down, rayDist);
-
-        if (groundCheck.collider == false)
-        {
-            if (movingRight == true)
-            {
-                transform.eulerAngles = new Vector3(0, -180, 0);
-                movingRight = false;
-            }
-            else
-            {
-                transform.eulerAngles = new Vector3(0, 0, 0);
-                movingRight = true;
-            }
-        }
+        //
     }
 
     public void DecreaseHealth(int damage)

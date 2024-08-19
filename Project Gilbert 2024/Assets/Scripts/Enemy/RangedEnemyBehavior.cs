@@ -73,7 +73,7 @@ public class RangedEnemyBehavior : MonoBehaviour
     // EVERYTHING UNDERNEATH HAS TO DEAL WITH PLAYER MOVEMENT BOUNCING OFF WALLS
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Ground")) // if colliding with platform/wall
+        if(collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Ground")) // if colliding with platform/wall
         {
             dirX *= -1f;
         }
