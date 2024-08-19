@@ -8,22 +8,17 @@ public class EnemyBehavior : MonoBehaviour
 {
     // for patrolling
     [SerializeField] float moveSpeed = 5f; // adjustable enemy speed
-    public float rayDist;
-    private bool movingRight;
-    public Transform groundDetect;
+    public float rayDist; // for detecting ground underneath
+    private bool movingRight; // for patrolling logic
+    public Transform groundDetect; // for patrolling logic
 
-    // etc.
+    // for movement and player interaction
     Rigidbody2D rb; // initialize rigidbody
     Transform target; // set to chase the player
     Vector2 moveDirection; // logic for moving enemy to player
-    public GameObject player;
+    public GameObject player; // for player taking damage
 
-    // for projectiles
-    public GameObject bullet; // bullet prefab
-    public float fireRate = 5000f; // fire every 5 seconds
-    public float shotPower = 20f; //force of bullet
-
-    public EnemyData enemyData;
+    public EnemyData enemyData; // unsused
 
     // Might not be necessary, unsure if any other classes will need to listen for enemy death
     public Action OnDie;
@@ -44,7 +39,6 @@ public class EnemyBehavior : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.Translate(moveSpeed * Time.deltaTime * Vector2.right);
@@ -80,14 +74,6 @@ public class EnemyBehavior : MonoBehaviour
     {
         Instantiate(trash, gameObject.transform.position, Quaternion.identity);
         Destroy(this.gameObject);
-    }
-
-    private void FixedUpdate()
-    {
-        if (target)
-        {
-            rb.velocity = new Vector2(moveDirection.x, moveDirection.y) * moveSpeed; // set to chase player
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
