@@ -550,7 +550,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8244889036541081512, guid: 9c338ba4be8005d4fa5ea87a33f5db88, type: 3}
       propertyPath: m_EdgeRadius
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1410,7 +1410,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1.0388472, y: 0.35327148}
-  m_EdgeRadius: 1
+  m_EdgeRadius: 0
 --- !u!212 &468055662
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1540,7 +1540,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1.0388472, y: 0.35327148}
-  m_EdgeRadius: 1
+  m_EdgeRadius: 0
 --- !u!212 &471512607
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2541,7 +2541,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8244889036541081512, guid: 9c338ba4be8005d4fa5ea87a33f5db88, type: 3}
       propertyPath: m_EdgeRadius
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2671,7 +2671,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1.0388472, y: 0.35327148}
-  m_EdgeRadius: 1
+  m_EdgeRadius: 0
 --- !u!212 &835041208
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3337,7 +3337,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1.0388472, y: 0.35327148}
-  m_EdgeRadius: 1
+  m_EdgeRadius: 0
 --- !u!212 &1158132153
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3707,7 +3707,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8244889036541081512, guid: 9c338ba4be8005d4fa5ea87a33f5db88, type: 3}
       propertyPath: m_EdgeRadius
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4208,7 +4208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8244889036541081512, guid: 9c338ba4be8005d4fa5ea87a33f5db88, type: 3}
       propertyPath: m_EdgeRadius
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4789,7 +4789,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1.0388472, y: 0.35327148}
-  m_EdgeRadius: 1
+  m_EdgeRadius: 0
 --- !u!212 &1723663543
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5869,7 +5869,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1.0388472, y: 0.35327148}
-  m_EdgeRadius: 1
+  m_EdgeRadius: 0
 --- !u!212 &2000449821
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6190,8 +6190,12 @@ PrefabInstance:
       value: ice-platform-2
       objectReference: {fileID: 0}
     - target: {fileID: 8244889036541081512, guid: 9c338ba4be8005d4fa5ea87a33f5db88, type: 3}
-      propertyPath: m_EdgeRadius
+      propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244889036541081512, guid: 9c338ba4be8005d4fa5ea87a33f5db88, type: 3}
+      propertyPath: m_EdgeRadius
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
