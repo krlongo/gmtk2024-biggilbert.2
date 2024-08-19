@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.XR;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class PlayerBehavior : MonoBehaviour
 {
     private Rigidbody2D rb2d;
     public PlayerData playerData;
+    public Slider staminaBar;
 
     // TODO: Link some values below with values in playerData so it's accessible via other classes if necessary
 
@@ -65,6 +66,7 @@ public class PlayerBehavior : MonoBehaviour
         defaultGravityScale = rb2d.gravityScale;
         currentStamina = maxStamina;
         Reset();
+        
     }
     private void FixedUpdate()
     {
@@ -174,6 +176,7 @@ public class PlayerBehavior : MonoBehaviour
                 isClimbing = false;
                 animator.SetBool("isClimbing", false);
                 rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
+                staminaBar.gameObject.SetActive(false);
             }
 
             isJumping = false;
@@ -187,6 +190,7 @@ public class PlayerBehavior : MonoBehaviour
                 rb2d.velocity = Vector2.zero;
                 isClimbing = true;
                 isJumping = false;
+                staminaBar.gameObject.SetActive(true);
                 animator.SetBool("isClimbing", true);
             }
         }
@@ -201,8 +205,13 @@ public class PlayerBehavior : MonoBehaviour
             currentStamina += Time.deltaTime;
             rb2d.gravityScale = defaultGravityScale;
             isClimbing = false;
+            staminaBar.gameObject.SetActive(false);
+
             animator.SetBool("isClimbing", false);
         }
+
+        staminaBar.value = currentStamina / 100;
+        staminaBar.maxValue = maxStamina / 100;
         #endregion
     }
 
@@ -264,6 +273,7 @@ public class PlayerBehavior : MonoBehaviour
                 {
                     canClimb = false;
                     isClimbing = false;
+                    staminaBar.gameObject.SetActive(false);
                     rb2d.gravityScale = defaultGravityScale;
                     isClimbing = false;
                     animator.SetBool("isClimbing", false);
