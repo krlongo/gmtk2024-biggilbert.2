@@ -18,7 +18,6 @@ public class PlayerBehavior : MonoBehaviour
     public float MoveSpeed;
 
     [Header("Jumping")]
-    public float jumpForce;
     public int numOfJumps;
     public LayerMask groundMask;
     public bool isGrounded;
@@ -125,7 +124,7 @@ public class PlayerBehavior : MonoBehaviour
                 animator.SetBool("isJumping", true);
                 jumpTimeCounter = jumpTime;
                 rb2d.velocity = Vector2.zero;
-                rb2d.velocity = Vector2.up * jumpForce;
+                rb2d.velocity = Vector2.up * playerData.jumpForce;
                 numOfJumps--;
             }
             else if (isClimbing)
@@ -139,7 +138,7 @@ public class PlayerBehavior : MonoBehaviour
                 animator.SetBool("isJumping", true);
                 jumpTimeCounter = jumpTime;
                 rb2d.velocity = Vector2.zero;
-                rb2d.velocity = Vector2.up * jumpForce;
+                rb2d.velocity = Vector2.up * playerData.jumpForce;
                 numOfJumps--;
             }
         }
@@ -148,7 +147,7 @@ public class PlayerBehavior : MonoBehaviour
         {
             if(jumpTimeCounter > 0)
             {
-                rb2d.velocity = Vector2.up * jumpForce;
+                rb2d.velocity = Vector2.up * playerData.jumpForce;
                 jumpTimeCounter -= Time.deltaTime;
             }
             else
@@ -258,6 +257,9 @@ public class PlayerBehavior : MonoBehaviour
         playerData.maxHealth = 3;
         playerData.currentHealth = 3;
         playerData.isDead = false;
+        playerData.items.Clear();
+        playerData.jumpForce = 10;
+        HealthComponent.OnAdjustHealth?.Invoke();
     }
 
     void DeathLoop(){

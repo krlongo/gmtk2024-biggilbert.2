@@ -8,7 +8,7 @@ public class PlayerData : ScriptableObject
     public int maxHealth;
     public int currentHealth;
     public Vector2 currentPosition;
-    public float jumpHeight;
+    public float jumpForce;
     public float movementSpeed;
     public float maxStamina;
     public float currentStamina;
