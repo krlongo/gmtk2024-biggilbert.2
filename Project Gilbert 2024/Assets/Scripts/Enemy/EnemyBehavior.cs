@@ -6,8 +6,13 @@ using UnityEngine;
 
 public class EnemyBehavior : MonoBehaviour
 {
-    // for mechanics overall
+    // for patrolling
     [SerializeField] float moveSpeed = 5f; // adjustable enemy speed
+    public float rayDist;
+    private bool movingRight;
+    public Transform groundDetect;
+
+    // etc.
     Rigidbody2D rb; // initialize rigidbody
     Transform target; // set to chase the player
     Vector2 moveDirection; // logic for moving enemy to player
@@ -42,10 +47,21 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(target)
+        transform.Translate(moveSpeed * Time.deltaTime * Vector2.right);
+        RaycastHit2D groundCheck = Physics2D.Raycast(groundDetect.position, Vector2.down, rayDist);
+
+        if (groundCheck.collider == false)
         {
-            Vector3 direction = (target.position - transform.position).normalized; // direction to player
-            moveDirection = direction; // now we have our path
+            if (movingRight == true)
+            {
+                transform.eulerAngles = new Vector3(0, -180, 0);
+                movingRight = false;
+            }
+            else
+            {
+                transform.eulerAngles = new Vector3(0, 0, 0);
+                movingRight = true;
+            }
         }
     }
 
