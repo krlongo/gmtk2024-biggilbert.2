@@ -16,7 +16,7 @@ public class Trash : MonoBehaviour
     void Update()
     {
         
-    }
+    } 
 
     public void RandomizeValue()
     {

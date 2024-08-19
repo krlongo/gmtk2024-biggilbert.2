@@ -25,7 +25,15 @@ public class Stomp : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy") & collision.GetType() == typeof(CapsuleCollider2D))
         {
-            Destroy(collision.gameObject);
+            if (collision.gameObject.GetComponent<EnemyBehavior>())
+            {
+                collision.gameObject.GetComponent<EnemyBehavior>().DecreaseHealth(1);
+            }
+            else
+            {
+                collision.gameObject.GetComponent<RangedEnemyBehavior>().DecreaseHealth(1);
+            }
+            
             playerRb.velocity = new Vector2(playerRb.velocity.x, bounce);
         }
     }

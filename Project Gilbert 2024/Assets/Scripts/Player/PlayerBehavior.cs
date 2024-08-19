@@ -220,6 +220,7 @@ public class PlayerBehavior : MonoBehaviour
                 int trashValue = collision.gameObject.GetComponent<Trash>().value;
                 playerData.trashAmount += trashValue;
                 OnTrashChange.Invoke();
+                Destroy(collision.gameObject);
             }
         }
     }
@@ -260,6 +261,9 @@ public class PlayerBehavior : MonoBehaviour
         playerData.items.Clear();
         playerData.jumpForce = 10;
         HealthComponent.OnAdjustHealth?.Invoke();
+        playerData.trashAmount = 0;
+        OnTrashChange?.Invoke();
+
     }
 
     void DeathLoop(){
