@@ -10,14 +10,15 @@ public class PatrolBehavior : MonoBehaviour
     private bool movingRight = true;
     public Transform groundDetect;
     public EnemyData enemyData;
+    public int groundlayerIndex = 1 << 6;
 
     // Update is called once per frame
     void Update()
     {
         transform.Translate(enemyData.moveSpeed * Time.deltaTime * Vector2.right);
-        RaycastHit2D groundCheck = Physics2D.Raycast(groundDetect.position, Vector2.down, rayDist);
+        RaycastHit2D groundCheck = Physics2D.Raycast(groundDetect.position, Vector2.down, rayDist, groundlayerIndex);
 
-        if (groundCheck.collider == false)
+        if (!groundCheck.collider)
         {
             TurnAround();
         }

@@ -34,7 +34,7 @@ public class SceneSwitcher : MonoBehaviour
     public void ResetGame()
     {
         // TODO: Change with proper scene names
-        SceneManager.LoadScene("ClimbingScene");
+        SceneManager.LoadScene("LevelOne");
     }
 
     public void NextLevel()
@@ -43,12 +43,12 @@ public class SceneSwitcher : MonoBehaviour
         switch (SceneManager.GetActiveScene().name)
         {
             case "LevelOne":
-                SceneManager.LoadScene("LevelTwo");
+                SceneManager.LoadScene("Level 2 Test");
                 break;
-            case "LevelTwo":
-                SceneManager.LoadScene("LevelThree");
+            case "Level 2 Test":
+                SceneManager.LoadScene("Level 3 Test");
                 break;
-            case "LevelThree":
+            case "Level 3 Test":
                 SceneManager.LoadScene("GameWon");
                 break;
         }
