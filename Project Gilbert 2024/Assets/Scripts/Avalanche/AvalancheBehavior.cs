@@ -34,7 +34,7 @@ public class AvalancheBehavior : MonoBehaviour
         // Stop avalanche movement if player is dead
         if(!playerData.isDead && !doNotRiseUp)
         {
-            rb2d.velocity = new Vector2(rb2d.velocity.x, avalancheData.MoveDirection * avalancheData.MoveSpeed);
+            rb2d.velocity = new Vector2(rb2d.velocity.x, 1 * avalancheData.moveSpeed);
         }
     }
 
