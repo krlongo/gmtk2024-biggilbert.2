@@ -219,10 +219,13 @@ public class PlayerBehavior : MonoBehaviour
             }
             else if (collision.gameObject.CompareTag("Trash"))
             {
-                int trashValue = collision.gameObject.GetComponent<Trash>().value;
-                playerData.trashAmount += trashValue;
-                OnTrashChange.Invoke();
-                Destroy(collision.gameObject);
+                if (collision.gameObject.GetComponent<Trash>().isGrabbable)
+                {
+                    int trashValue = collision.gameObject.GetComponent<Trash>().value;
+                    playerData.trashAmount += trashValue;
+                    OnTrashChange.Invoke();
+                    Destroy(collision.gameObject);
+                }
             }
         }
     }
