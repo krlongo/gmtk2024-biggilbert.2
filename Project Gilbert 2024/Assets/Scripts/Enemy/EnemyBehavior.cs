@@ -7,7 +7,8 @@ using UnityEngine;
 public class EnemyBehavior : MonoBehaviour
 {
     // for patrolling
-    [SerializeField] float moveSpeed = 5f; // adjustable enemy speed
+    int maxHealth;
+    int currentHealth;
     public float rayDist; // for detecting ground underneath
     private bool movingRight; // for patrolling logic
     public Transform groundDetect; // for patrolling logic
@@ -36,19 +37,25 @@ public class EnemyBehavior : MonoBehaviour
     {
         target = GameObject.Find("Player").transform; // initialize target to Player
         player = GameObject.FindGameObjectWithTag("Player"); // find player and assign to variable
-
+        SetStats();
     }
 
     void Update()
     {
-        //
+        
+    }
+
+    private void SetStats()
+    {
+        maxHealth = enemyData.maxHealth;
+        currentHealth = enemyData.currentHealth;
     }
 
     public void DecreaseHealth(int damage)
     {
-        enemyData.currentHealth = enemyData.currentHealth - damage;
+        currentHealth = currentHealth - damage;
 
-        if (enemyData.currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             OnDie?.Invoke();
             Die();
