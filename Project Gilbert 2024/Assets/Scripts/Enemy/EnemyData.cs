@@ -11,6 +11,4 @@ public class EnemyData : ScriptableObject
     public float damage;
     public float moveSpeed;
     public float attackSpeed;
-    public Vector2 currentPosition;
-    public bool isDead;
 }

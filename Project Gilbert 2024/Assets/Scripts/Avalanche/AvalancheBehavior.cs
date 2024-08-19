@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Tilemaps;
 using UnityEditor.XR;
 using UnityEngine;
@@ -13,7 +14,8 @@ public class AvalancheBehavior : MonoBehaviour
     public PlayerData playerData;
 
     private Vector2 defaultPosition;
-    
+
+    public bool doNotRiseUp;
 
     [Header("Climbing")]
     public bool isClimbing;
@@ -24,14 +26,13 @@ public class AvalancheBehavior : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         defaultPosition = rb2d.position;
         Reset();
-        HealthComponent.OnDie += OnDeath;
     }
 
     // Update is called once per frame
     void Update()
     {
         // Stop avalanche movement if player is dead
-        if(!playerData.isDead)
+        if(!playerData.isDead && !doNotRiseUp)
         {
             rb2d.velocity = new Vector2(rb2d.velocity.x, avalancheData.MoveDirection * avalancheData.MoveSpeed);
         }
@@ -46,6 +47,7 @@ public class AvalancheBehavior : MonoBehaviour
             {
                 Debug.Log("Colliding with player");
                 playerData.isDead = true;
+                playerData.currentHealth = 0;
                 HealthComponent.OnDie?.Invoke();
             }
         }
@@ -73,5 +75,15 @@ public class AvalancheBehavior : MonoBehaviour
         Debug.Log("Resetting avalanche");
         rb2d.position = defaultPosition;
         Debug.Log(defaultPosition);
+    }
+
+    private void OnEnable()
+    {
+        HealthComponent.OnDie += OnDeath;
+    }
+
+    private void OnDisable()
+    {
+        HealthComponent.OnDie -= OnDeath;
     }
 }

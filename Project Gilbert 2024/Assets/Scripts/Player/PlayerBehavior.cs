@@ -37,7 +37,7 @@ public class PlayerBehavior : MonoBehaviour
     public float maxStamina;
 
     [Header("Animation")]
-    private Animator animator;
+    public Animator animator;
 
     [Header("Audio")]
     public AudioSource playerAudioSource;
@@ -66,7 +66,6 @@ public class PlayerBehavior : MonoBehaviour
         currentStamina = maxStamina;
         Reset();
     }
-
     private void FixedUpdate()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
@@ -115,7 +114,7 @@ public class PlayerBehavior : MonoBehaviour
         {
             animator.SetBool("isFalling", false);
         }
-
+        
         if (Input.GetKeyDown(KeyCode.Space)) 
         {
             if(isGrounded)
@@ -129,13 +128,14 @@ public class PlayerBehavior : MonoBehaviour
             }
             else if (isClimbing)
             {
-                canClimb = false;
+                //canClimb = false;
                 isClimbing = false;
                 rb2d.gravityScale = defaultGravityScale;
                 isClimbing = false;
                 rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
                 isJumping = true;
                 animator.SetBool("isJumping", true);
+                animator.SetBool("isClimbing", false);
                 jumpTimeCounter = jumpTime;
                 rb2d.velocity = Vector2.zero;
                 rb2d.velocity = Vector2.up * playerData.jumpForce;
@@ -220,6 +220,7 @@ public class PlayerBehavior : MonoBehaviour
                 int trashValue = collision.gameObject.GetComponent<Trash>().value;
                 playerData.trashAmount += trashValue;
                 OnTrashChange.Invoke();
+                Destroy(collision.gameObject);
             }
         }
     }
@@ -260,6 +261,9 @@ public class PlayerBehavior : MonoBehaviour
         playerData.items.Clear();
         playerData.jumpForce = 10;
         HealthComponent.OnAdjustHealth?.Invoke();
+        playerData.trashAmount = 0;
+        OnTrashChange?.Invoke();
+
     }
 
     void DeathLoop(){
@@ -268,6 +272,7 @@ public class PlayerBehavior : MonoBehaviour
 
     public void Reset(){
         rb2d.position = defaultPosition;
+        animator.SetBool("isDead", false);
         ResetPlayerData();
     }
 
