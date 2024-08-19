@@ -66,7 +66,6 @@ public class PlayerBehavior : MonoBehaviour
         currentStamina = maxStamina;
         Reset();
     }
-
     private void FixedUpdate()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
@@ -115,7 +114,7 @@ public class PlayerBehavior : MonoBehaviour
         {
             animator.SetBool("isFalling", false);
         }
-
+        
         if (Input.GetKeyDown(KeyCode.Space)) 
         {
             if(isGrounded)
@@ -129,13 +128,14 @@ public class PlayerBehavior : MonoBehaviour
             }
             else if (isClimbing)
             {
-                canClimb = false;
+                //canClimb = false;
                 isClimbing = false;
                 rb2d.gravityScale = defaultGravityScale;
                 isClimbing = false;
                 rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
                 isJumping = true;
                 animator.SetBool("isJumping", true);
+                animator.SetBool("isClimbing", false);
                 jumpTimeCounter = jumpTime;
                 rb2d.velocity = Vector2.zero;
                 rb2d.velocity = Vector2.up * playerData.jumpForce;
