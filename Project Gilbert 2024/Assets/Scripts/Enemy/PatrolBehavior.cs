@@ -9,16 +9,17 @@ public class PatrolBehavior : MonoBehaviour
     public float rayDist;
     private bool movingRight = true;
     public Transform groundDetect;
+    public EnemyData enemyData;
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(speed * Time.deltaTime * Vector2.right);
+        transform.Translate(enemyData.moveSpeed * Time.deltaTime * Vector2.right);
         RaycastHit2D groundCheck = Physics2D.Raycast(groundDetect.position, Vector2.down, rayDist);
 
         if (groundCheck.collider == false)
         {
-            turnAround();
+            TurnAround();
         }
 
     }
@@ -28,11 +29,11 @@ public class PatrolBehavior : MonoBehaviour
         Debug.Log("Entered trigger event...");
         if (collision.gameObject.CompareTag("Wall"))
         {
-            turnAround();
+            TurnAround();
         }
     }
 
-    private void turnAround()
+    private void TurnAround()
     {
         if (movingRight == true)
         {

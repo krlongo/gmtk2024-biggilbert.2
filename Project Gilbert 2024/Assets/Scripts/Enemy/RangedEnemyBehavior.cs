@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class RangedEnemyBehavior : MonoBehaviour
 {
-
+    public int maxHealth;
+    public int currentHealth;
     private float dirX;
     private Rigidbody2D rb;
     public float moveSpeed;
@@ -36,7 +37,7 @@ public class RangedEnemyBehavior : MonoBehaviour
         localScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
         dirX = -1f;
-        moveSpeed = 3f;
+        SetStats();
     }
 
     // Update is called once per frame
@@ -45,11 +46,17 @@ public class RangedEnemyBehavior : MonoBehaviour
         // set to move back and forth eventually
     }
 
+    private void SetStats()
+    {
+        maxHealth = enemyData.maxHealth;
+        currentHealth = enemyData.currentHealth;
+    }
+
     public void DecreaseHealth(int damage)
     {
-        enemyData.currentHealth = enemyData.currentHealth - damage;
+        currentHealth = currentHealth - damage;
 
-        if (enemyData.currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             OnDie?.Invoke();
             Die();
@@ -81,7 +88,7 @@ public class RangedEnemyBehavior : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+        rb.velocity = new Vector2(dirX * enemyData.moveSpeed, rb.velocity.y);
     }
 
     private void LateUpdate()

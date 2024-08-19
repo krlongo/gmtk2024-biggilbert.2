@@ -127,9 +127,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b756bf847507abf48a61ac2812f50fb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 0
+  currentHealth: 0
   moveSpeed: 20
-  enemyData: {fileID: 0}
-  trash: {fileID: 0}
+  enemyData: {fileID: 11400000, guid: eb25bb66087eee840822173f8a58307d, type: 2}
+  trash: {fileID: 910329019547661948, guid: f350e4adca029a442a14f934906f9e72, type: 3}
 --- !u!61 &445365778071639639
 BoxCollider2D:
   m_ObjectHideFlags: 0
