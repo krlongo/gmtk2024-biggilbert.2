@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -13,15 +14,15 @@ public class HUD : MonoBehaviour
 
     public Button healthIncreaseButton;
     public Button jumpHeightIncreaseButton;
+    public Button resetButton;
+
+    public static Action OnReset;
+    public static Action OnContinue;
 
     // Start is called before the first frame update
     void Start()
     {
-        DisableButtons();
-        UpdateHealth();
-        UpdateTrashAmount();
-        healthIncreaseButton.onClick.AddListener(() => AddHealthItem());
-        jumpHeightIncreaseButton.onClick.AddListener(() => AddJumpHeightItem());
+        
     }
 
     public void AddHealthItem()
@@ -36,7 +37,7 @@ public class HUD : MonoBehaviour
         item.modifier = modifier;
 
         playerData.items.Add(item);
-        BonfireBehavior.OnAddItem(item);
+        BonfireBehavior.OnAddItem?.Invoke(item);
         DisableButtons();
     }
 
@@ -52,7 +53,7 @@ public class HUD : MonoBehaviour
         item.modifier = modifier;
         
         playerData.items.Add(item);
-        BonfireBehavior.OnAddItem(item);
+        BonfireBehavior.OnAddItem?.Invoke(item);
         DisableButtons();
     }
 
@@ -66,6 +67,7 @@ public class HUD : MonoBehaviour
     {
         healthIncreaseButton.gameObject.SetActive(false);
         jumpHeightIncreaseButton.gameObject.SetActive(false);
+        resetButton.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -74,16 +76,21 @@ public class HUD : MonoBehaviour
         
     }
 
-    private void OnEnable()
+    void OnEnable()
     {
         HealthComponent.OnDie += PlayerDied;
         HealthComponent.OnAdjustHealth += UpdateHealth;
         HealthComponent.OnAdjustMaxHealth += UpdateHealth;
         PlayerBehavior.OnTrashChange += UpdateTrashAmount;
         BonfireBehavior.OnRest += EnableButtons;
+
+        ResetHUD();
+        healthIncreaseButton.onClick.AddListener(() => AddHealthItem());
+        jumpHeightIncreaseButton.onClick.AddListener(() => AddJumpHeightItem());
+        resetButton.onClick.AddListener(() => ResetGame());
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         HealthComponent.OnDie -= PlayerDied;
         HealthComponent.OnAdjustHealth -= UpdateHealth;
@@ -94,7 +101,6 @@ public class HUD : MonoBehaviour
 
     private void UpdateHealth()
     {
-        Debug.Log("UpdateHealth");
         healthText.text = "Health: " + playerData.currentHealth;
     }
 
@@ -106,7 +112,21 @@ public class HUD : MonoBehaviour
     // TODO: Trigger Game Over screen
     private void PlayerDied()
     {
+        UpdateHealth();
+        resetButton.gameObject.SetActive(true);
         Debug.Log("Game Over");
     }
 
+    private void ResetGame()
+    {
+        OnReset?.Invoke();
+        ResetHUD();
+    }
+
+    private void ResetHUD()
+    {
+        DisableButtons();
+        UpdateHealth();
+        UpdateTrashAmount();
+    }
 }
