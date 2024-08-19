@@ -12,7 +12,17 @@ public class PlayerItemChange : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+    }
+
+    private void OnEnable()
+    {
         BonfireBehavior.OnAddItem += AdjustStat;
+    }
+
+    private void OnDisable()
+    {
+        BonfireBehavior.OnAddItem -= AdjustStat;
     }
 
     // Update is called once per frame
