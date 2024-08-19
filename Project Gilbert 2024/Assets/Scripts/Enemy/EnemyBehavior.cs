@@ -6,20 +6,9 @@ using UnityEngine;
 
 public class EnemyBehavior : MonoBehaviour
 {
-    // for patrolling
-    int maxHealth;
-    int currentHealth;
-    public float rayDist; // for detecting ground underneath
-    private bool movingRight; // for patrolling logic
-    public Transform groundDetect; // for patrolling logic
-
-    // for movement and player interaction
-    Rigidbody2D rb; // initialize rigidbody
-    Transform target; // set to chase the player
-    Vector2 moveDirection; // logic for moving enemy to player
-    public GameObject player; // for player taking damage
-
-    public EnemyData enemyData; // unsused
+    
+    public int currentHealth;
+    public EnemyData enemyData; 
 
     // Might not be necessary, unsure if any other classes will need to listen for enemy death
     public Action OnDie;
@@ -29,14 +18,12 @@ public class EnemyBehavior : MonoBehaviour
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>(); // initialize rigidbody
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        target = GameObject.Find("Player").transform; // initialize target to Player
-        player = GameObject.FindGameObjectWithTag("Player"); // find player and assign to variable
         SetStats();
     }
 
@@ -47,7 +34,6 @@ public class EnemyBehavior : MonoBehaviour
 
     private void SetStats()
     {
-        maxHealth = enemyData.maxHealth;
         currentHealth = enemyData.currentHealth;
     }
 
@@ -73,7 +59,7 @@ public class EnemyBehavior : MonoBehaviour
         if (collision.collider.GetType() == typeof(BoxCollider2D) && collision.gameObject.CompareTag("Player")) // if enemy hits player
         {
             Debug.Log("Taking damage");
-            player.GetComponent<HealthComponent>().AdjustHealth(-1); // lower health by 1
+            collision.gameObject.GetComponent<HealthComponent>().AdjustHealth(-1); // lower health by 1
         }
     }
 }

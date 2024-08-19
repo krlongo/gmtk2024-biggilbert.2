@@ -26,8 +26,12 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Player")) // if colliding with player
         {
             player.GetComponent<HealthComponent>().AdjustHealth(-1); // lower health by 1
-            // hitTimer = 3f; // for I-frames later to be implemented
             Destroy(this.gameObject); // and destroy the object
+        }
+        // destroy bullet on contact with platform or wall
+        else if(collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Ground"))
+        {
+            Destroy(this.gameObject);
         }
     }
 }
