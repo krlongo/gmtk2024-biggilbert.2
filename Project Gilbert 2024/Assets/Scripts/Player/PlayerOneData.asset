@@ -15,10 +15,11 @@ MonoBehaviour:
   maxHealth: 3
   currentHealth: 3
   currentPosition: {x: 0, y: 0}
-  jumpHeight: 0
+  jumpForce: 0
   movementSpeed: 0
   maxStamina: 0
   currentStamina: 0
   items: []
-  isDead: 1
+  trashAmount: 0
+  isDead: 0
   isInvicible: 0
