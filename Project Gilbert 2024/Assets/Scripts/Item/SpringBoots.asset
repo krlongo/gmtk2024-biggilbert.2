@@ -9,17 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31efa22e46b5d8c4b9353c9340e06d6d, type: 3}
-  m_Name: PlayerOneData
+  m_Script: {fileID: 11500000, guid: 25685779bf12fd64ca547aa66bf31d31, type: 3}
+  m_Name: SpringBoots
   m_EditorClassIdentifier: 
-  maxHealth: 3
-  currentHealth: 3
-  currentPosition: {x: 0, y: 0}
-  jumpForce: 0
-  movementSpeed: 0
-  maxStamina: 0
-  currentStamina: 0
-  items: []
-  trashAmount: 0
-  isDead: 0
-  isInvicible: 0
+  itemName: SpringBoots
+  description: Jump height increase
+  modifier: {fileID: 11400000, guid: da4e242a5c16f3d44b3c43f66fbeed0b, type: 2}

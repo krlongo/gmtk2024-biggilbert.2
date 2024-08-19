@@ -17,5 +17,4 @@ public class ItemModifier : ScriptableObject
 {
     public Stats stat;
     public float modifierValue;
-
 }

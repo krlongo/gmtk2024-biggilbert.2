@@ -115,7 +115,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &7994167831988226101
 BoxCollider2D:
@@ -232,6 +232,13 @@ MonoBehaviour:
   climbingMoveSpeed: 5
   isClimbing: 0
   canClimb: 0
+  currentStamina: 0
+  maxStamina: 0
+  playerAudioSource: {fileID: 0}
+  jumpSFX: {fileID: 0}
+  climbSFX: {fileID: 0}
+  onHitSFX: {fileID: 0}
+  trashPickupSFX: {fileID: 0}
 --- !u!95 &2987023299984033240
 Animator:
   serializedVersion: 5

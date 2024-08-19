@@ -74,13 +74,4 @@ public class AvalancheBehavior : MonoBehaviour
         rb2d.position = defaultPosition;
         Debug.Log(defaultPosition);
     }
-    
-    public void OnCheckpoint(){
-
-        Vector3 tmpPos = rb2d.position;
-        tmpPos.y = tmpPos.y - 2; //how magical!
-        defaultPosition = rb2d.position;
-        defaultPosition = tmpPos;
-    }
-
 }

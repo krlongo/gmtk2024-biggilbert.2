@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.XR;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerBehavior : MonoBehaviour
 {
@@ -17,7 +18,6 @@ public class PlayerBehavior : MonoBehaviour
     public float MoveSpeed;
 
     [Header("Jumping")]
-    public float jumpForce;
     public int numOfJumps;
     public LayerMask groundMask;
     public bool isGrounded;
@@ -25,6 +25,7 @@ public class PlayerBehavior : MonoBehaviour
     public bool isJumping;
     public float jumpTimeCounter;
     public float jumpTime;
+    private float defaultGravityScale;
 
     private Vector3 defaultPosition;
 
@@ -32,9 +33,18 @@ public class PlayerBehavior : MonoBehaviour
     public float climbingMoveSpeed;
     public bool isClimbing = false;
     public bool canClimb;
+    public float currentStamina;
+    public float maxStamina;
 
     [Header("Animation")]
     private Animator animator;
+
+    [Header("Audio")]
+    public AudioSource playerAudioSource;
+    public AudioClip jumpSFX;
+    public AudioClip climbSFX;
+    public AudioClip onHitSFX;
+    public AudioClip trashPickupSFX;
 
     public static Action OnTrashChange;
 
@@ -52,6 +62,8 @@ public class PlayerBehavior : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         defaultPosition = rb2d.position;
+        defaultGravityScale = rb2d.gravityScale;
+        currentStamina = maxStamina;
         Reset();
     }
 
@@ -63,11 +75,27 @@ public class PlayerBehavior : MonoBehaviour
         if (isClimbing)
         {
             rb2d.velocity = new Vector2(horizontal * climbingMoveSpeed, vertical * climbingMoveSpeed);
+            currentStamina -= Time.deltaTime;
         }
         else
         {
             rb2d.velocity = new Vector2(horizontal * MoveSpeed, rb2d.velocity.y);
         }
+
+        if(!Mathf.Approximately(horizontal, 0.0f) && isGrounded)
+            animator.SetBool("isMoving", true);
+        else
+            animator.SetBool("isMoving", false);
+
+        if(isGrounded)
+        {
+            currentStamina = maxStamina;
+            //if(currentStamina < maxStamina)
+            //{
+            //    currentStamina += Time.deltaTime;
+            //}
+        }
+
     }
 
     // Update is called once per frame
@@ -76,15 +104,16 @@ public class PlayerBehavior : MonoBehaviour
         // Don't allow movement if player is dead (likely better way to do this to stop update call)
         if (playerData.isDead) return;
 
+        #region Jumping/Falling
         isGrounded = Physics2D.OverlapCircle(feetPos.position, .3f, groundMask);
 
-        if(rb2d.velocity.y < 0)
+        if (rb2d.velocity.y < 0)
         {
             animator.SetBool("isFalling", true);
         }
         else
         {
-            animator.SetBool("isFalling", true);
+            animator.SetBool("isFalling", false);
         }
 
         if (Input.GetKeyDown(KeyCode.Space)) 
@@ -95,21 +124,21 @@ public class PlayerBehavior : MonoBehaviour
                 animator.SetBool("isJumping", true);
                 jumpTimeCounter = jumpTime;
                 rb2d.velocity = Vector2.zero;
-                rb2d.velocity = Vector2.up * jumpForce;
+                rb2d.velocity = Vector2.up * playerData.jumpForce;
                 numOfJumps--;
             }
             else if (isClimbing)
             {
                 canClimb = false;
                 isClimbing = false;
-                rb2d.gravityScale = 1;
+                rb2d.gravityScale = defaultGravityScale;
                 isClimbing = false;
                 rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
                 isJumping = true;
                 animator.SetBool("isJumping", true);
                 jumpTimeCounter = jumpTime;
                 rb2d.velocity = Vector2.zero;
-                rb2d.velocity = Vector2.up * jumpForce;
+                rb2d.velocity = Vector2.up * playerData.jumpForce;
                 numOfJumps--;
             }
         }
@@ -118,7 +147,7 @@ public class PlayerBehavior : MonoBehaviour
         {
             if(jumpTimeCounter > 0)
             {
-                rb2d.velocity = Vector2.up * jumpForce;
+                rb2d.velocity = Vector2.up * playerData.jumpForce;
                 jumpTimeCounter -= Time.deltaTime;
             }
             else
@@ -134,13 +163,14 @@ public class PlayerBehavior : MonoBehaviour
             isJumping = false;
             animator.SetBool("isJumping", false);
         }
+        #endregion
 
         #region Climbing
         if (Input.GetKeyUp(KeyCode.Mouse1))
         {
             if(isClimbing)
             {
-                rb2d.gravityScale = 5;
+                rb2d.gravityScale = defaultGravityScale;
                 isClimbing = false;
                 animator.SetBool("isClimbing", false);
                 rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
@@ -151,22 +181,29 @@ public class PlayerBehavior : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            if (!isClimbing && canClimb)
+            if (!isClimbing && canClimb && currentStamina > 0)
             {
                 rb2d.gravityScale = 0;
                 rb2d.velocity = Vector2.zero;
                 isClimbing = true;
                 isJumping = false;
                 animator.SetBool("isClimbing", true);
-
             }
         }
-        #endregion
 
         if (!isClimbing && horizontal < 0)
             GetComponent<SpriteRenderer>().flipX = true;
         else
             GetComponent<SpriteRenderer>().flipX = false;
+
+        if (currentStamina < 0 && isClimbing)
+        {
+            currentStamina += Time.deltaTime;
+            rb2d.gravityScale = defaultGravityScale;
+            isClimbing = false;
+            animator.SetBool("isClimbing", false);
+        }
+        #endregion
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -199,7 +236,7 @@ public class PlayerBehavior : MonoBehaviour
                 }
                 canClimb = false;
                 isClimbing = false;
-                rb2d.gravityScale = 5;
+                rb2d.gravityScale = defaultGravityScale;
                 isClimbing = false;
                 animator.SetBool("isClimbing", false);
                 Debug.Log("cannot climb");
@@ -220,6 +257,9 @@ public class PlayerBehavior : MonoBehaviour
         playerData.maxHealth = 3;
         playerData.currentHealth = 3;
         playerData.isDead = false;
+        playerData.items.Clear();
+        playerData.jumpForce = 10;
+        HealthComponent.OnAdjustHealth?.Invoke();
     }
 
     void DeathLoop(){
