@@ -25,12 +25,6 @@ public class MountainProgressBar : MonoBehaviour
        // CalculateMountainHeight();
     }
 
-    public void OnSliderChanged(float value)
-    {
-        ProgressSlider.maxValue = maxMountainHeight;
-        ProgressSlider.value = playerDistanceToHeight;
-    }
-
     public void CalculateMountainHeight()
     {
         maxMountainHeight = checkpointObject.transform.position.y;
