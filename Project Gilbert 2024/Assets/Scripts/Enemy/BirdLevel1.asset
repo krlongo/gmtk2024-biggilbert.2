@@ -18,4 +18,4 @@ MonoBehaviour:
   damage: 1
   moveSpeed: 2
   attackSpeed: 1
-  currentPosition: {x: 0, y: 0}
+  stageLevel: 1
