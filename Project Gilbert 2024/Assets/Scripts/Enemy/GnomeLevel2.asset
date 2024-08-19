@@ -18,3 +18,4 @@ MonoBehaviour:
   damage: 1
   moveSpeed: 1
   attackSpeed: 1
+  stageLevel: 2

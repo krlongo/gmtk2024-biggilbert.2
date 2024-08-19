@@ -2,11 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using UnityEngine.XR;
+using static UnityEngine.GraphicsBuffer;
 
 public class RangedEnemyBehavior : MonoBehaviour
 {
     public int currentHealth;
     private float dirX;
+    private float dirY;
     private Rigidbody2D rb;
     public float moveSpeed;
     private bool facingRight = false;
@@ -18,27 +22,96 @@ public class RangedEnemyBehavior : MonoBehaviour
 
     // for enemy drops
     public GameObject trash;
+    public GameObject player;
+
+    public bool isDiving;
+    public bool isReturning;
+    public float divingTimer;
+    public Vector3 originalPosition;
 
 
     // Start is called before the first frame update
     void Start()
     {
-
         localScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
         dirX = -1f;
+        dirY = -1f;
         SetStats();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // set to move back and forth eventually
+        if (!isDiving && ShouldDive())
+        {
+            Dive();
+        }
+        else if (isDiving && this.transform.position == originalPosition)
+        {
+            isDiving = false;
+            isReturning = false;
+        } 
+        else if (isDiving && !isReturning && this.transform.position != originalPosition)
+        {
+            rb.velocity = new Vector2(0, dirY * enemyData.moveSpeed);
+        } 
+        else if (isDiving && isReturning && this.transform.position != originalPosition)
+        {
+            if (CheckDiveTimer())
+            {
+                transform.position = Vector3.MoveTowards(transform.position, originalPosition, enemyData.moveSpeed * Time.deltaTime);
+            }
+            else
+            {
+                return;
+            }
+        }
+        else
+        {
+            rb.velocity = new Vector2(dirX * enemyData.moveSpeed, 0);
+        }
+    }
+
+    public bool ShouldDive()
+    {
+        if (enemyData.stageLevel == 2 && Math.Abs(this.transform.position.x - GameObject.FindGameObjectWithTag("Player").transform.position.x) < 3
+            && this.transform.position.y > GameObject.FindGameObjectWithTag("Player").transform.position.y 
+            && Math.Abs(this.transform.position.y - GameObject.FindGameObjectWithTag("Player").transform.position.y) < 3) 
+        { 
+            return true;
+        }
+
+        return false;
+    }
+
+    public void Dive()
+    {
+        isDiving = true;
+        originalPosition = this.transform.position;
+        // rb.transform.localScale = Vector3.down;
+        rb.velocity = new Vector2(0, dirY * enemyData.moveSpeed);
+        divingTimer = .5f;
+    }
+
+    // Added to make bird wait when hitting the ground before going back up
+    public bool CheckDiveTimer()
+    {
+        if (divingTimer > 0)
+        {
+            divingTimer -= Time.deltaTime;
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 
     private void SetStats()
     {
         currentHealth = enemyData.currentHealth;
+        rb.velocity = new Vector2(dirX * enemyData.moveSpeed, 0);
     }
 
     public void DecreaseHealth(int damage)
@@ -63,39 +136,17 @@ public class RangedEnemyBehavior : MonoBehaviour
         if (collision.collider.GetType() == typeof(BoxCollider2D) && collision.gameObject.CompareTag("Player")) // if enemy hits player
         {
             collision.gameObject.GetComponent<HealthComponent>().AdjustHealth(-1); // lower health by 1
-        }
-    }
-
-    // EVERYTHING UNDERNEATH HAS TO DEAL WITH PLAYER MOVEMENT BOUNCING OFF WALLS
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Ground")) // if colliding with platform/wall
+        } else if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Ground")) // if colliding with platform/wall
         {
-            dirX *= -1f;
+            if (isDiving)
+            {
+                isReturning = true;
+            }
+            else
+            {
+                dirX *= -1f;
+                rb.velocity = new Vector2(dirX * enemyData.moveSpeed, 0);
+            }
         }
     }
-
-    private void FixedUpdate()
-    {
-        rb.velocity = new Vector2(dirX * enemyData.moveSpeed, rb.velocity.y);
-    }
-
-    private void LateUpdate()
-    {
-        CheckWhereToFace();
-    }
-
-    private void CheckWhereToFace()
-    {
-        if (dirX > 0)
-            facingRight = true;
-        else if (dirX < 0)
-            facingRight = false;
-
-        if (((facingRight) && (localScale.x < 0)) || ((!facingRight) && (localScale.x > 0)))
-            localScale.x *= -1;
-
-        transform.localScale = localScale;
-    }
-
 }
