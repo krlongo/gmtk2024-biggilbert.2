@@ -206,6 +206,8 @@ public class PlayerBehavior : MonoBehaviour
         #endregion
     }
 
+    public bool insideClimbingArea;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision != null)
@@ -225,7 +227,20 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 
-        private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision != null)
+        {
+            if (collision.gameObject.CompareTag("Climbable"))
+            {
+                canClimb = true;
+                insideClimbingArea = true;
+                Debug.Log("can climb");
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision != null)
         {
@@ -235,12 +250,27 @@ public class PlayerBehavior : MonoBehaviour
                 {
                     rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
                 }
-                canClimb = false;
-                isClimbing = false;
-                rb2d.gravityScale = defaultGravityScale;
-                isClimbing = false;
-                animator.SetBool("isClimbing", false);
-                Debug.Log("cannot climb");
+                else
+                {
+                    if(insideClimbingArea)
+                    {
+                        canClimb = false;
+                    }
+                }
+                if(!insideClimbingArea)
+                {
+                    canClimb = false;
+                    isClimbing = false;
+                    rb2d.gravityScale = defaultGravityScale;
+                    isClimbing = false;
+                    animator.SetBool("isClimbing", false);
+                    Debug.Log("cannot climb");
+                }
+                else
+                {
+                    insideClimbingArea = false;
+                }
+
             }
         }
     }
