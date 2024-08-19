@@ -196,7 +196,7 @@ public class PlayerBehavior : MonoBehaviour
         else
             GetComponent<SpriteRenderer>().flipX = false;
 
-        if (currentStamina < 0 && isClimbing)
+        if ((currentStamina < 0 && isClimbing) || !insideClimbingArea)
         {
             currentStamina += Time.deltaTime;
             rb2d.gravityScale = defaultGravityScale;
