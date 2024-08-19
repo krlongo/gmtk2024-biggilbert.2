@@ -18,17 +18,32 @@ public class PatrolBehavior : MonoBehaviour
 
         if (groundCheck.collider == false)
         {
-            if (movingRight == true)
-            {
-                transform.eulerAngles = new Vector3(0, -180, 0);
-                movingRight = false;
-            }
-            else
-            {
-                transform.eulerAngles = new Vector3(0, 0, 0);
-                movingRight = true;
-            }
+            turnAround();
         }
 
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Entered trigger event...");
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            turnAround();
+        }
+    }
+
+    private void turnAround()
+    {
+        if (movingRight == true)
+        {
+            transform.eulerAngles = new Vector3(0, -180, 0);
+            movingRight = false;
+        }
+        else
+        {
+            transform.eulerAngles = new Vector3(0, 0, 0);
+            movingRight = true;
+        }
+    }
+
 }
