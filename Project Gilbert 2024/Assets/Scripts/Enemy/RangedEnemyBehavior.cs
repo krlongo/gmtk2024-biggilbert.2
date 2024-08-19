@@ -10,7 +10,7 @@ public class RangedEnemyBehavior : MonoBehaviour
     private Rigidbody2D rb;
     public float moveSpeed;
     private bool facingRight = false;
-    private Vector3 localeScale;
+    private Vector3 localScale;
 
     // for base mechanics
     // Transform target; // set to chase the player
@@ -33,7 +33,7 @@ public class RangedEnemyBehavior : MonoBehaviour
         self = GameObject.Find("Bird").transform; // initialize self so bird knows what to shoot
         player = GameObject.FindGameObjectWithTag("Player"); // find player and assign to variable
 
-        localeScale = transform.localScale;
+        localScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
         dirX = -1f;
         moveSpeed = 3f;
@@ -70,9 +70,36 @@ public class RangedEnemyBehavior : MonoBehaviour
         }
     }
 
+    // EVERYTHING UNDERNEATH HAS TO DEAL WITH PLAYER MOVEMENT BOUNCING OFF WALLS
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // if(collision.tag)
+        if(collision.gameObject.CompareTag("Ground")) // if colliding with platform/wall
+        {
+            dirX *= -1f;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+    }
+
+    private void LateUpdate()
+    {
+        CheckWhereToFace();
+    }
+
+    private void CheckWhereToFace()
+    {
+        if (dirX > 0)
+            facingRight = true;
+        else if (dirX < 0)
+            facingRight = false;
+
+        if (((facingRight) && (localScale.x < 0)) || ((!facingRight) && (localScale.x > 0)))
+            localScale.x *= -1;
+
+        transform.localScale = localScale;
     }
 
 }

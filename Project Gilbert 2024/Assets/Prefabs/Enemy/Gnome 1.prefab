@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 6023766551041183896}
   - component: {fileID: 6210512204589634901}
   m_Layer: 0
-  m_Name: Gnome
+  m_Name: Gnome 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
