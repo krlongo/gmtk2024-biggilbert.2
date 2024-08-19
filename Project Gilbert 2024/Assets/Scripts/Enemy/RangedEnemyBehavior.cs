@@ -89,7 +89,6 @@ public class RangedEnemyBehavior : MonoBehaviour
     {
         isDiving = true;
         originalPosition = this.transform.position;
-        // rb.transform.localScale = Vector3.down;
         rb.velocity = new Vector2(0, dirY * enemyData.moveSpeed);
         divingTimer = .5f;
     }
