@@ -110,3 +110,4 @@ MonoBehaviour:
   camMovementOffsetDown: 3
   dampingUp: 1
   dampingDown: 0.25
+  maxCamHeight: 48

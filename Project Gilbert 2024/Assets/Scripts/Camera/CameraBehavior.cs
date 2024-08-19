@@ -16,6 +16,8 @@ public class CameraBehavior : MonoBehaviour
     public float dampingUp = 1;
     public float dampingDown = 0.25f;
 
+    public float maxCamHeight = 48;
+
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
@@ -39,10 +41,14 @@ public class CameraBehavior : MonoBehaviour
         {
             targetPosition.Set(0, target.position.y, transform.position.z);
 
+            targetPosition.y = Mathf.Clamp(targetPosition.y, -999, maxCamHeight);
+
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref vel, dampingDown);
         }
         else
         {
+            targetPosition.y = Mathf.Clamp(targetPosition.y, -999, maxCamHeight);
+
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref vel, dampingUp);
         }
     }
