@@ -24,7 +24,6 @@ public class AvalancheBehavior : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         defaultPosition = rb2d.position;
         Reset();
-        HealthComponent.OnDie += OnDeath;
     }
 
     // Update is called once per frame
@@ -46,6 +45,7 @@ public class AvalancheBehavior : MonoBehaviour
             {
                 Debug.Log("Colliding with player");
                 playerData.isDead = true;
+                playerData.currentHealth = 0;
                 HealthComponent.OnDie?.Invoke();
             }
         }
@@ -73,5 +73,15 @@ public class AvalancheBehavior : MonoBehaviour
         Debug.Log("Resetting avalanche");
         rb2d.position = defaultPosition;
         Debug.Log(defaultPosition);
+    }
+
+    private void OnEnable()
+    {
+        HealthComponent.OnDie += OnDeath;
+    }
+
+    private void OnDisable()
+    {
+        HealthComponent.OnDie -= OnDeath;
     }
 }
