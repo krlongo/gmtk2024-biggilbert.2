@@ -10,6 +10,7 @@ TagManager:
   - Checkpoint
   - Enemy
   - Feet
+  - Trash
   layers:
   - Default
   - TransparentFX
