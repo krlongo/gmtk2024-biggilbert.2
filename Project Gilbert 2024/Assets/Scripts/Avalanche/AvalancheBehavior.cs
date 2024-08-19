@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Tilemaps;
 using UnityEditor.XR;
 using UnityEngine;
@@ -13,7 +14,8 @@ public class AvalancheBehavior : MonoBehaviour
     public PlayerData playerData;
 
     private Vector2 defaultPosition;
-    
+
+    public bool doNotRiseUp;
 
     [Header("Climbing")]
     public bool isClimbing;
@@ -30,7 +32,7 @@ public class AvalancheBehavior : MonoBehaviour
     void Update()
     {
         // Stop avalanche movement if player is dead
-        if(!playerData.isDead)
+        if(!playerData.isDead && !doNotRiseUp)
         {
             rb2d.velocity = new Vector2(rb2d.velocity.x, avalancheData.MoveDirection * avalancheData.MoveSpeed);
         }

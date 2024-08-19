@@ -37,7 +37,7 @@ public class PlayerBehavior : MonoBehaviour
     public float maxStamina;
 
     [Header("Animation")]
-    private Animator animator;
+    public Animator animator;
 
     [Header("Audio")]
     public AudioSource playerAudioSource;
@@ -272,6 +272,7 @@ public class PlayerBehavior : MonoBehaviour
 
     public void Reset(){
         rb2d.position = defaultPosition;
+        animator.SetBool("isDead", false);
         ResetPlayerData();
     }
 
