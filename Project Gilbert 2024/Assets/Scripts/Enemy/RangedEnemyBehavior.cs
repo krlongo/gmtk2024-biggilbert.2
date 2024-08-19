@@ -5,19 +5,12 @@ using UnityEngine;
 
 public class RangedEnemyBehavior : MonoBehaviour
 {
-    public int maxHealth;
     public int currentHealth;
     private float dirX;
     private Rigidbody2D rb;
     public float moveSpeed;
     private bool facingRight = false;
     private Vector3 localScale;
-
-    // for base mechanics
-    // Transform target; // set to chase the player
-    Transform self; // set to shoot from current location
-    Vector2 moveDirection; // logic for moving enemy to player
-    GameObject player; // have instance of player for collision and projectile hit
 
     // for enemy data and death
     public EnemyData enemyData;
@@ -30,9 +23,6 @@ public class RangedEnemyBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // target = GameObject.Find("Player").transform; // initialize target to Player (WILL BE HELPFUL FOR ATTACKING LATER)
-        self = GameObject.Find("Bird").transform; // initialize self so bird knows what to shoot
-        player = GameObject.FindGameObjectWithTag("Player"); // find player and assign to variable
 
         localScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
@@ -48,7 +38,6 @@ public class RangedEnemyBehavior : MonoBehaviour
 
     private void SetStats()
     {
-        maxHealth = enemyData.maxHealth;
         currentHealth = enemyData.currentHealth;
     }
 
@@ -73,7 +62,7 @@ public class RangedEnemyBehavior : MonoBehaviour
     {
         if (collision.collider.GetType() == typeof(BoxCollider2D) && collision.gameObject.CompareTag("Player")) // if enemy hits player
         {
-            player.GetComponent<HealthComponent>().AdjustHealth(-1); // lower health by 1
+            collision.gameObject.GetComponent<HealthComponent>().AdjustHealth(-1); // lower health by 1
         }
     }
 

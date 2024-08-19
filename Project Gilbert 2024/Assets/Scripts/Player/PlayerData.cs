@@ -16,4 +16,5 @@ public class PlayerData : ScriptableObject
     public int trashAmount;
     public bool isDead;
     public bool isInvicible;
+    public float invicibleTimer;
 }
