@@ -13,7 +13,6 @@ public class RangedEnemyBehavior : MonoBehaviour
     private float dirY;
     private Rigidbody2D rb;
     public float moveSpeed;
-    private bool facingRight = false;
     private Vector3 localScale;
 
     // for enemy data and death

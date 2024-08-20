@@ -58,7 +58,6 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (collision.collider.GetType() == typeof(BoxCollider2D) && collision.gameObject.CompareTag("Player")) // if enemy hits player
         {
-            Debug.Log("Taking damage");
             collision.gameObject.GetComponent<HealthComponent>().AdjustHealth(-1); // lower health by 1
         }
     }

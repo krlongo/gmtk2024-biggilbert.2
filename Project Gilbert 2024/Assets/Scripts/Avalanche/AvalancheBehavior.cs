@@ -45,10 +45,7 @@ public class AvalancheBehavior : MonoBehaviour
         {
             if(collision.gameObject.CompareTag("Player"))
             {
-                Debug.Log("Colliding with player");
-                playerData.isDead = true;
-                playerData.currentHealth = 0;
-                HealthComponent.OnDie?.Invoke();
+                collision.gameObject.GetComponent<HealthComponent>().AdjustHealth(-avalancheData.damage);
             }
         }
     }
@@ -72,9 +69,7 @@ public class AvalancheBehavior : MonoBehaviour
        If it isn't showing up, try adding a pointless argument... IDK why man... IDK...
        **/
     public void Reset(){
-        Debug.Log("Resetting avalanche");
         rb2d.position = defaultPosition;
-        Debug.Log(defaultPosition);
     }
 
     private void OnEnable()

@@ -17,4 +17,5 @@ public class PlayerData : ScriptableObject
     public bool isDead;
     public bool isInvicible;
     public float invicibleTimer;
+    public int currentLevel;
 }

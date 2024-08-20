@@ -38,6 +38,6 @@ public class Trash : MonoBehaviour
 
     public void RandomizeValue()
     {
-        value = Random.Range(1, 5);
+        value = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehavior>().playerData.currentLevel * Random.Range(1, 5);
     }
 }
