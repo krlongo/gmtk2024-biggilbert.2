@@ -51,12 +51,12 @@ public class SceneSwitcher : MonoBehaviour
                 SceneManager.LoadScene("LevelOne");
                 break;
             case "LevelOne":
-                SceneManager.LoadScene("Level 2 Test");
+                SceneManager.LoadScene("LevelTwo");
                 break;
-            case "Level 2 Test":
-                SceneManager.LoadScene("Level 3 Test");
+            case "LevelTwo":
+                SceneManager.LoadScene("LevelThree");
                 break;
-            case "Level 3 Test":
+            case "LevelThree":
                 SceneManager.LoadScene("GameWon");
                 break;
         }
