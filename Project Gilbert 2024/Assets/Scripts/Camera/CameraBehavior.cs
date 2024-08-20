@@ -56,10 +56,12 @@ public class CameraBehavior : MonoBehaviour
         }
     }
 
-    public void OnDeath(){
+    public void OnDeath() 
+    {
         stopCamera = true;
     }
-        private void OnEnable()
+
+    private void OnEnable()
     {
         HealthComponent.OnDie += OnDeath;
     }
