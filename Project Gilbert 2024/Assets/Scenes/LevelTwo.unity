@@ -1442,7 +1442,7 @@ GameObject:
   - component: {fileID: 346664196}
   m_Layer: 6
   m_Name: level2-block-ice1 (7)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8690,11 +8690,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1812450062418991267, guid: 6356f72898e838d48979ef13fdd9496d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.46
+      value: -5.25
       objectReference: {fileID: 0}
     - target: {fileID: 1812450062418991267, guid: 6356f72898e838d48979ef13fdd9496d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 29.46
+      value: 28.23
       objectReference: {fileID: 0}
     - target: {fileID: 1812450062418991267, guid: 6356f72898e838d48979ef13fdd9496d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9138,11 +9138,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4512485617926744966, guid: 9f2a24b596e7e5646ab18397ab13eb37, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.04
+      value: -0.76
       objectReference: {fileID: 0}
     - target: {fileID: 4512485617926744966, guid: 9f2a24b596e7e5646ab18397ab13eb37, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -16.93
+      value: -20.82
       objectReference: {fileID: 0}
     - target: {fileID: 4512485617926744966, guid: 9f2a24b596e7e5646ab18397ab13eb37, type: 3}
       propertyPath: m_LocalPosition.z
