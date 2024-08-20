@@ -29,6 +29,8 @@ public class MainMenu : MonoBehaviour
         playerData.trashAmount = 0;
         playerData.maxStamina = 3;
         playerData.currentLevel = 0;
+        playerData.movementSpeed = 7;
+        playerData.climbingSpeed = 5;
     }
 
     public void ShowControls()

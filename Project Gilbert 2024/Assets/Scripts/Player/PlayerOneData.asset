@@ -16,7 +16,8 @@ MonoBehaviour:
   currentHealth: 3
   currentPosition: {x: 0, y: 0}
   jumpForce: 10
-  movementSpeed: 0
+  movementSpeed: 7
+  climbingSpeed: 5
   maxStamina: 3
   currentStamina: 3
   items:
