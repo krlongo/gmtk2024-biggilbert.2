@@ -8133,6 +8133,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bird 2 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8327046462860607665, guid: 0fb514c4d0c81b0458816aaa995b2a01, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8327046462860607665, guid: 0fb514c4d0c81b0458816aaa995b2a01, type: 3}
+      propertyPath: objectToTrack
+      value: 
+      objectReference: {fileID: 31069874}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
