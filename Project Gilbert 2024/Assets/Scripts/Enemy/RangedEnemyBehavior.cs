@@ -9,6 +9,7 @@ using static UnityEngine.GraphicsBuffer;
 public class RangedEnemyBehavior : MonoBehaviour
 {
     public int currentHealth;
+    public bool isDead;
     private float dirX;
     private float dirY;
     private Rigidbody2D rb;
@@ -28,6 +29,9 @@ public class RangedEnemyBehavior : MonoBehaviour
     public float divingTimer;
     public Vector3 originalPosition;
 
+    public Sprite deathSprite;
+
+    public BoxCollider2D boxCollider;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +46,7 @@ public class RangedEnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isDiving && ShouldDive())
+        if (!isDiving && ShouldDive() && !isDead)
         {
             Dive();
         }
@@ -68,7 +72,8 @@ public class RangedEnemyBehavior : MonoBehaviour
         }
         else
         {
-            rb.velocity = new Vector2(dirX * enemyData.moveSpeed, 0);
+            if(!isDead)
+                rb.velocity = new Vector2(dirX * enemyData.moveSpeed, 0);
         }
     }
 
@@ -110,6 +115,7 @@ public class RangedEnemyBehavior : MonoBehaviour
     {
         currentHealth = enemyData.currentHealth;
         rb.velocity = new Vector2(dirX * enemyData.moveSpeed, 0);
+        isDead = false;
         CheckDirection();
     }
 
@@ -127,6 +133,19 @@ public class RangedEnemyBehavior : MonoBehaviour
     public void Die()
     {
         Instantiate(trash, gameObject.transform.position, Quaternion.identity);
+        GetComponent<SpriteRenderer>().sprite = deathSprite;
+        GetComponent<Animator>().enabled = false;
+        isDead = true;
+        rb.velocity = Vector2.zero;
+        rb.gravityScale = 10;
+        rb.mass = 1;
+        boxCollider.isTrigger = true;
+        StartCoroutine(DestroySelf(3f));
+    }
+
+    public IEnumerator DestroySelf(float time)
+    {
+        yield return new WaitForSeconds(time);
         Destroy(this.gameObject);
     }
 
