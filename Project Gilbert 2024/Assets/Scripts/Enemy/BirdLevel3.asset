@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: BirdLevel3
   m_EditorClassIdentifier: 
   enemyName: Bird3
-  maxHealth: 3
-  currentHealth: 3
+  maxHealth: 2
+  currentHealth: 2
   damage: 1
-  moveSpeed: 2
+  moveSpeed: 4
   attackSpeed: 1
   stageLevel: 3

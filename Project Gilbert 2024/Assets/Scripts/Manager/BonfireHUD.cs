@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,9 @@ public class BonfireHUD : MonoBehaviour
     public Button increaseHealth;
     public Button increaseStamina;
     public Button increaseSpeed;
+    public Button continueButton;
+
+    public TMP_Text trashAmountText;
 
     public Image goatSitting;
     public Image goatSleeping;
@@ -29,11 +33,19 @@ public class BonfireHUD : MonoBehaviour
         increaseHealth.onClick.AddListener(() => AddHealthItem());
         increaseStamina.onClick.AddListener(() => AddStaminaItem());
         increaseSpeed.onClick.AddListener(() => AddSpeedItem());
+        continueButton.onClick.AddListener(() => ContinueClicked());
+        PlayerItemChange.OnTrashChange += UpdateTrashAmount;
+        UpdateTrashAmount();
     }
 
     void OnDisable()
     {
+        PlayerItemChange.OnTrashChange -= UpdateTrashAmount;
+    }
 
+    private void UpdateTrashAmount()
+    {
+        trashAmountText.text = playerData.trashAmount.ToString();
     }
 
     public void AddHealthItem()
@@ -55,9 +67,9 @@ public class BonfireHUD : MonoBehaviour
         else
         {
             playerData.trashAmount -= item.cost;
+            PlayerItemChange.OnTrashChange?.Invoke();
             playerData.items.Add(item);
             BonfireBehavior.OnAddItem?.Invoke(item);
-            DisableButtons();
             OnUpgrade?.Invoke();
         }
     }
@@ -80,9 +92,10 @@ public class BonfireHUD : MonoBehaviour
         }
         else
         {
+            playerData.trashAmount -= item.cost;
+            PlayerItemChange.OnTrashChange?.Invoke();
             playerData.items.Add(item);
             BonfireBehavior.OnAddItem?.Invoke(item);
-            DisableButtons();
             OnUpgrade?.Invoke();
         }
     }
@@ -91,7 +104,7 @@ public class BonfireHUD : MonoBehaviour
     {
         ItemData item = ScriptableObject.CreateInstance<ItemData>();
         ItemModifier modifier = ScriptableObject.CreateInstance<ItemModifier>();
-        modifier.stat = Stats.JumpHeight;
+        modifier.stat = Stats.MovementSpeed;
         modifier.modifierValue = .25f;
 
         item.itemName = "Speedy Kicks";
@@ -105,11 +118,19 @@ public class BonfireHUD : MonoBehaviour
         }
         else
         {
+            playerData.trashAmount -= item.cost;
+            PlayerItemChange.OnTrashChange?.Invoke();
             playerData.items.Add(item);
             BonfireBehavior.OnAddItem?.Invoke(item);
-            DisableButtons();
             OnUpgrade?.Invoke();
         }
+    }
+
+    public void ContinueClicked()
+    {
+        DisableButtons();
+        isSleeping = true;
+        sleepingTimer = 3.801f;
     }
 
     public void DisableButtons()
@@ -120,8 +141,6 @@ public class BonfireHUD : MonoBehaviour
         increaseSpeed.gameObject.SetActive(false);
         goatSitting.enabled = false;
         goatSleeping.enabled = true;
-        isSleeping = true;
-        sleepingTimer = 3f;
     }
 
     // Update is called once per frame
@@ -134,7 +153,6 @@ public class BonfireHUD : MonoBehaviour
         }
         else
         {
-            Debug.Log("in Update");
             isSleeping = false;
             OnContinue?.Invoke();
         }

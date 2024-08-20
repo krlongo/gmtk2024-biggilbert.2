@@ -46,8 +46,6 @@ public class PlayerBehavior : MonoBehaviour
     public AudioClip onHitSFX;
     public AudioClip trashPickupSFX;
 
-    public static Action OnTrashChange;
-
 
     // Start is called before the first frame update
     void Start()
@@ -59,7 +57,6 @@ public class PlayerBehavior : MonoBehaviour
         defaultGravityScale = rb2d.gravityScale;
         playerData.currentStamina = playerData.maxStamina;
         Reset();
-        
     }
     private void FixedUpdate()
     {
@@ -236,7 +233,7 @@ public class PlayerBehavior : MonoBehaviour
                 {
                     int trashValue = collision.gameObject.GetComponent<Trash>().value;
                     playerData.trashAmount += trashValue;
-                    OnTrashChange?.Invoke();
+                    PlayerItemChange.OnTrashChange?.Invoke();
                     Destroy(collision.gameObject);
                 }
             }
@@ -308,7 +305,7 @@ public class PlayerBehavior : MonoBehaviour
         playerData.jumpForce = 10;
         playerData.trashAmount = 0;
         playerData.maxStamina = 3;
-        OnTrashChange?.Invoke();
+        PlayerItemChange.OnTrashChange?.Invoke();
         playerData.currentLevel = 1;
     }
 
@@ -341,10 +338,9 @@ public class PlayerBehavior : MonoBehaviour
     // Add event listener OnEnable
     public void OnEnable()
     {
-        OnTrashChange?.Invoke();
+        PlayerItemChange.OnTrashChange?.Invoke();
         HealthComponent.OnDie += Die;
         BonfireBehavior.OnRest += StopPlayer;
         HUD.OnReset += ResetPlayerData;
     }
-
 }

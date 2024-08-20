@@ -9,6 +9,8 @@ public class PlayerItemChange : MonoBehaviour
 {
     public PlayerData playerData;
 
+    public static Action OnTrashChange;
+
     // Start is called before the first frame update
     void Start()
     {

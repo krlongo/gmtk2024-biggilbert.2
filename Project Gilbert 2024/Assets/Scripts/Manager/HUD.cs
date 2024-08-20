@@ -38,7 +38,7 @@ public class HUD : MonoBehaviour
         HealthComponent.OnDie += PlayerDied;
         HealthComponent.OnAdjustHealth += UpdateHealth;
         HealthComponent.OnAdjustMaxHealth += UpdateHealth;
-        PlayerBehavior.OnTrashChange += UpdateTrashAmount;
+        PlayerItemChange.OnTrashChange += UpdateTrashAmount;
 
         ResetHUD();
         resetButton.onClick.AddListener(() => ResetGame());
@@ -49,7 +49,7 @@ public class HUD : MonoBehaviour
         HealthComponent.OnDie -= PlayerDied;
         HealthComponent.OnAdjustHealth -= UpdateHealth;
         HealthComponent.OnAdjustMaxHealth -= UpdateHealth;
-        PlayerBehavior.OnTrashChange -= UpdateTrashAmount;
+        PlayerItemChange.OnTrashChange -= UpdateTrashAmount;
     }
 
     private void UpdateHealth()
