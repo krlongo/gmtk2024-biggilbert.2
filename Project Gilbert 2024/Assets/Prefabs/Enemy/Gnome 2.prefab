@@ -165,8 +165,8 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 3b02a6605c5a3ba45b2b7c954a9e1328, type: 2}
   deathSprite: {fileID: 0}
   isDead: 0
-  rb: {fileID: 0}
-  boxCollider: {fileID: 0}
+  rb: {fileID: 128211661351543295}
+  boxCollider: {fileID: 7400775048970533744}
   trash: {fileID: 910329019547661948, guid: f350e4adca029a442a14f934906f9e72, type: 3}
 --- !u!61 &7400775048970533744
 BoxCollider2D:
@@ -263,7 +263,7 @@ MonoBehaviour:
   speed: 3
   rayDist: 2
   groundDetect: {fileID: 1087837540147114574}
-  enemyData: {fileID: 11400000, guid: 3b02a6605c5a3ba45b2b7c954a9e1328, type: 2}
+  enemyData: {fileID: 11400000, guid: 020cb92dedef70840bc3c2172c8dd1bb, type: 2}
   groundlayerIndex: 64
 --- !u!95 &8394186443185883023
 Animator:

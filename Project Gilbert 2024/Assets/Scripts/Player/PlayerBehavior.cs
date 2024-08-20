@@ -228,7 +228,7 @@ public class PlayerBehavior : MonoBehaviour
                 {
                     int trashValue = collision.gameObject.GetComponent<Trash>().value;
                     playerData.trashAmount += trashValue;
-                    OnTrashChange.Invoke();
+                    OnTrashChange?.Invoke();
                     Destroy(collision.gameObject);
                 }
             }
