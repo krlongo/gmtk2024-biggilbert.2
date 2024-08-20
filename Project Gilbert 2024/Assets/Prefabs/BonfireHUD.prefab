@@ -1277,7 +1277,7 @@ GameObject:
   - component: {fileID: 4376000517505083443}
   - component: {fileID: 9207484217567000140}
   m_Layer: 5
-  m_Name: UpgradeMenu2
+  m_Name: UpgradeMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1379,6 +1379,7 @@ RectTransform:
   - {fileID: 3516264609850996451}
   - {fileID: 8632876044182405155}
   - {fileID: 4364502583073088273}
+  - {fileID: 2911898108959447280}
   - {fileID: 2779636431298295119}
   - {fileID: 4966196756628787583}
   - {fileID: 5543478639644310378}
@@ -1388,9 +1389,8 @@ RectTransform:
   - {fileID: 2976207190931077797}
   - {fileID: 613497338999863183}
   - {fileID: 7490830646879999192}
-  - {fileID: 2911898108959447280}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1480,7 +1480,7 @@ MonoBehaviour:
   trashAmountText: {fileID: 451084696175068576}
   goatSitting: {fileID: 1527457889381237019}
   goatSleeping: {fileID: 5599910055261846308}
-  upgradeMenu: {fileID: 0}
+  upgradeMenu: {fileID: 9207484217567000140}
   backgroundImage: {fileID: 8719025408358777900}
   sleepingTimer: 0
   isSleeping: 0
