@@ -17,6 +17,8 @@ public class PlayerBehavior : MonoBehaviour
     [Header("Movement")]
     private float horizontal;
     private float vertical;
+    public float MoveSpeed;
+    public bool facingRight;
 
     [Header("Jumping")]
     public int numOfJumps;
@@ -89,6 +91,8 @@ public class PlayerBehavior : MonoBehaviour
             playerData.currentStamina = playerData.maxStamina;
         }
 
+
+
     }
 
     // Update is called once per frame
@@ -97,6 +101,14 @@ public class PlayerBehavior : MonoBehaviour
         // Don't allow movement if player is dead (likely better way to do this to stop update call)
         if (playerData.isDead) return;
 
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            facingRight = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            facingRight = false;
+        }
         #region Jumping/Falling
         isGrounded = Physics2D.OverlapCircle(feetPos.position, .3f, groundMask);
 
@@ -108,8 +120,8 @@ public class PlayerBehavior : MonoBehaviour
         {
             animator.SetBool("isFalling", false);
         }
-        
-        if (Input.GetKeyDown(KeyCode.Space)) 
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if(isGrounded)
             {
@@ -194,10 +206,18 @@ public class PlayerBehavior : MonoBehaviour
             }
         }
 
-        if (!isClimbing && horizontal < 0)
-            GetComponent<SpriteRenderer>().flipX = true;
-        else
-            GetComponent<SpriteRenderer>().flipX = false;
+        if (!isClimbing)
+        {
+            if(facingRight)
+            {
+               GetComponent<SpriteRenderer>().flipX = false;
+            }
+            else
+            {
+               GetComponent<SpriteRenderer>().flipX = true;
+            }
+        }
+
 
         if ((playerData.currentStamina < 0 && isClimbing) || !insideClimbingArea)
         {
