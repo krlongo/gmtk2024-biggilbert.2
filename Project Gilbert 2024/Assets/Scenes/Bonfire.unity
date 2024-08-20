@@ -318,7 +318,7 @@ PrefabInstance:
     - target: {fileID: 4958439027440204795, guid: 9ff8066c1f70cfe4497cfc6aaf1197d8, type: 3}
       propertyPath: upgradeMenu
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1559549052569251040}
     - target: {fileID: 4966196756628787583, guid: 9ff8066c1f70cfe4497cfc6aaf1197d8, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 45.8
@@ -344,3 +344,14 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ff8066c1f70cfe4497cfc6aaf1197d8, type: 3}
+--- !u!114 &1559549052569251040 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9207484217567000140, guid: 9ff8066c1f70cfe4497cfc6aaf1197d8, type: 3}
+  m_PrefabInstance: {fileID: 1559549052569251039}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
