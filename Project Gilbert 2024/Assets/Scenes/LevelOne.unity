@@ -7360,6 +7360,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2990911203418232893, guid: 0fb514c4d0c81b0458816aaa995b2a01, type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3809459309739968097, guid: 0fb514c4d0c81b0458816aaa995b2a01, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -7474,8 +7478,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8327046462860607665, guid: 0fb514c4d0c81b0458816aaa995b2a01, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8327046462860607665, guid: 0fb514c4d0c81b0458816aaa995b2a01, type: 3}
+      propertyPath: objectToTrack
+      value: 
+      objectReference: {fileID: 2109081630}
+    - target: {fileID: 8327046462860607665, guid: 0fb514c4d0c81b0458816aaa995b2a01, type: 3}
+      propertyPath: checkpointObject
+      value: 
+      objectReference: {fileID: 1862302673}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9359,6 +9371,7 @@ MonoBehaviour:
   dampingUp: 1
   dampingDown: 0.25
   maxCamHeight: 48
+  stopCamera: 0
 --- !u!1 &1506248598
 GameObject:
   m_ObjectHideFlags: 0
@@ -12270,6 +12283,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13d7101e2fc954a4b9a4d3011b4f63fb, type: 3}
+--- !u!1 &2109081630 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7833031281546057552, guid: 9f2a24b596e7e5646ab18397ab13eb37, type: 3}
+  m_PrefabInstance: {fileID: 98140675}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2120192534
 PrefabInstance:
   m_ObjectHideFlags: 0
