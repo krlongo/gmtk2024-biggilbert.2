@@ -17,7 +17,6 @@ public class PlayerBehavior : MonoBehaviour
     [Header("Movement")]
     private float horizontal;
     private float vertical;
-    public float MoveSpeed;
 
     [Header("Jumping")]
     public int numOfJumps;
@@ -32,7 +31,6 @@ public class PlayerBehavior : MonoBehaviour
     private Vector3 defaultPosition;
 
     [Header("Climbing")]
-    public float climbingMoveSpeed;
     public bool isClimbing = false;
     public bool canClimb;
 
@@ -66,7 +64,7 @@ public class PlayerBehavior : MonoBehaviour
 
         if (isClimbing)
         {
-            rb2d.velocity = new Vector2(horizontal * climbingMoveSpeed, vertical * climbingMoveSpeed);
+            rb2d.velocity = new Vector2(horizontal * playerData.climbingSpeed, vertical * playerData.climbingSpeed);
             playerData.currentStamina -= Time.deltaTime;
 
             // set audio to climbing clip loop -------------------------------------------------------------
@@ -78,7 +76,7 @@ public class PlayerBehavior : MonoBehaviour
         } // --------------------------------------------------------------------------------------------------
         else
         {
-            rb2d.velocity = new Vector2(horizontal * MoveSpeed, rb2d.velocity.y);
+            rb2d.velocity = new Vector2(horizontal * playerData.movementSpeed, rb2d.velocity.y);
         }
 
         if(!Mathf.Approximately(horizontal, 0.0f) && isGrounded)
@@ -307,6 +305,8 @@ public class PlayerBehavior : MonoBehaviour
         playerData.maxStamina = 3;
         PlayerItemChange.OnTrashChange?.Invoke();
         playerData.currentLevel = 1;
+        playerData.movementSpeed = 7;
+        playerData.climbingSpeed = 5;
     }
 
     void DeathLoop(){

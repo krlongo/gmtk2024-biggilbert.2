@@ -10,6 +10,7 @@ public class PlayerData : ScriptableObject
     public Vector2 currentPosition;
     public float jumpForce;
     public float movementSpeed;
+    public float climbingSpeed;
     public float maxStamina;
     public float currentStamina;
     public List<ItemData> items;
