@@ -111,6 +111,7 @@ public class RangedEnemyBehavior : MonoBehaviour
     {
         currentHealth = enemyData.currentHealth;
         rb.velocity = new Vector2(dirX * enemyData.moveSpeed, 0);
+        CheckDirection();
     }
 
     public void DecreaseHealth(int damage)
@@ -130,12 +131,24 @@ public class RangedEnemyBehavior : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    public void CheckDirection()
+    {
+        if (dirX > 0)
+        {
+            transform.eulerAngles = new Vector3(0, 0, 0);
+        }
+        else
+        {
+            transform.eulerAngles = new Vector3(0, -180, 0);
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.GetType() == typeof(BoxCollider2D) && collision.gameObject.CompareTag("Player")) // if enemy hits player
         {
             collision.gameObject.GetComponent<HealthComponent>().AdjustHealth(-1); // lower health by 1
-        } else if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Ground")) // if colliding with platform/wall
+        } else if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Enemy")) // if colliding with platform/wall
         {
             if (isDiving)
             {
@@ -144,6 +157,7 @@ public class RangedEnemyBehavior : MonoBehaviour
             else
             {
                 dirX *= -1f;
+                CheckDirection();
                 rb.velocity = new Vector2(dirX * enemyData.moveSpeed, 0);
             }
         }

@@ -75,6 +75,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 1
+  notGrabbableTimer: 0.1
+  isGrabbable: 0
 --- !u!212 &5538158652669299637
 SpriteRenderer:
   m_ObjectHideFlags: 0
