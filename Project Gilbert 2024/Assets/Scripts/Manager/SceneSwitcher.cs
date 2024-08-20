@@ -49,8 +49,10 @@ public class SceneSwitcher : MonoBehaviour
         if (playerData.currentLevel == 3)
         {
             NextLevel();
+        } else
+        {
+            SceneManager.LoadScene("Bonfire");
         }
-        SceneManager.LoadScene("Bonfire");
     }
 
     public void NextLevel()
