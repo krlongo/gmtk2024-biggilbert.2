@@ -17,6 +17,7 @@ public class CameraBehavior : MonoBehaviour
     public float dampingDown = 0.25f;
 
     public float maxCamHeight = 48;
+    public bool stopCamera = false;
 
     private void Start()
     {
@@ -26,6 +27,8 @@ public class CameraBehavior : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (stopCamera) return; 
+
         targetPosition = transform.position;
 
         if (target.position.y > transform.position.y + camMovementOffsetUp)
@@ -52,4 +55,18 @@ public class CameraBehavior : MonoBehaviour
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref vel, dampingUp);
         }
     }
+
+    public void OnDeath(){
+        stopCamera = true;
+    }
+        private void OnEnable()
+    {
+        HealthComponent.OnDie += OnDeath;
+    }
+
+    private void OnDisable()
+    {
+        HealthComponent.OnDie -= OnDeath;
+    }
+
 }
