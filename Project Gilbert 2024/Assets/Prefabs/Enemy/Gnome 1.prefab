@@ -163,6 +163,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   enemyData: {fileID: 11400000, guid: 3b02a6605c5a3ba45b2b7c954a9e1328, type: 2}
+  deathSprite: {fileID: 1088650907, guid: 5e19b36937062dc48b6b6b3aa2853017, type: 3}
+  isDead: 0
+  rb: {fileID: 128211661351543295}
+  boxCollider: {fileID: 7400775048970533744}
   trash: {fileID: 910329019547661948, guid: f350e4adca029a442a14f934906f9e72, type: 3}
 --- !u!61 &7400775048970533744
 BoxCollider2D:

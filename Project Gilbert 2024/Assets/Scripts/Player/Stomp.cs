@@ -27,11 +27,20 @@ public class Stomp : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<EnemyBehavior>())
             {
-                collision.gameObject.GetComponent<EnemyBehavior>().DecreaseHealth(1);
+                if(!collision.gameObject.GetComponent<EnemyBehavior>().isDead)
+                {
+                    collision.gameObject.GetComponent<EnemyBehavior>().DecreaseHealth(1);
+                }
             }
             else
             {
-                collision.gameObject.GetComponent<RangedEnemyBehavior>().DecreaseHealth(1);
+                if(collision.gameObject.GetComponent<RangedEnemyBehavior>())
+                {
+                    if (!collision.gameObject.GetComponent<RangedEnemyBehavior>().isDead)
+                    {
+                        collision.gameObject.GetComponent<RangedEnemyBehavior>().DecreaseHealth(1);
+                    }
+                }
             }
             
             playerRb.velocity = new Vector2(playerRb.velocity.x, bounce);
