@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 445365778071639639}
   - component: {fileID: 8262119027999623007}
   - component: {fileID: 1850367755058570512}
+  - component: {fileID: -5109366171434707885}
   m_Layer: 0
   m_Name: Bird 3
   m_TagString: Enemy
@@ -101,7 +102,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -115,7 +116,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 6
+  m_Constraints: 4
 --- !u!114 &2838295162253411234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,14 +130,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
+  isDead: 0
   moveSpeed: 20
-  enemyData: {fileID: 11400000, guid: eb25bb66087eee840822173f8a58307d, type: 2}
+  enemyData: {fileID: 11400000, guid: b7b58733ef8000647bc23cb35fa19143, type: 2}
   trash: {fileID: 910329019547661948, guid: f350e4adca029a442a14f934906f9e72, type: 3}
   player: {fileID: 0}
   isDiving: 0
   isReturning: 0
   divingTimer: 0
   originalPosition: {x: 0, y: 0, z: 0}
+  deathSprite: {fileID: -1281635272, guid: d9e69a07dac9c6d4ebaeb75764c64412, type: 3}
+  boxCollider: {fileID: 445365778071639639}
 --- !u!61 &445365778071639639
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -238,3 +242,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-5109366171434707885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2564965585731455783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f5fc1b831205d04f8f8de638bf8d512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 3798929796589067792, guid: 52ffd5a0f480a7047b898887c57acc4c, type: 3}
+  fireRate: 5000
+  shotPower: 5

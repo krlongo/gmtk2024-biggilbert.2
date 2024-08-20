@@ -54,6 +54,7 @@ public class RangedEnemyBehavior : MonoBehaviour
         {
             isDiving = false;
             isReturning = false;
+            CheckDirection();
         } 
         else if (isDiving && !isReturning && this.transform.position != originalPosition)
         {
@@ -63,6 +64,7 @@ public class RangedEnemyBehavior : MonoBehaviour
         {
             if (CheckDiveTimer())
             {
+                transform.eulerAngles = new Vector3(0, 0, 90);
                 transform.position = Vector3.MoveTowards(transform.position, originalPosition, enemyData.moveSpeed * Time.deltaTime);
             }
             else
@@ -72,16 +74,16 @@ public class RangedEnemyBehavior : MonoBehaviour
         }
         else
         {
-            if(!isDead)
+            if (!isDead)
                 rb.velocity = new Vector2(dirX * enemyData.moveSpeed, 0);
         }
     }
 
     public bool ShouldDive()
     {
-        if (enemyData.stageLevel == 2 && Math.Abs(this.transform.position.x - GameObject.FindGameObjectWithTag("Player").transform.position.x) < 3
+        if (enemyData.stageLevel == 2 && Math.Abs(this.transform.position.x - GameObject.FindGameObjectWithTag("Player").transform.position.x) < 2
             && this.transform.position.y > GameObject.FindGameObjectWithTag("Player").transform.position.y 
-            && Math.Abs(this.transform.position.y - GameObject.FindGameObjectWithTag("Player").transform.position.y) < 3) 
+            && Math.Abs(this.transform.position.y - GameObject.FindGameObjectWithTag("Player").transform.position.y) < 4) 
         { 
             return true;
         }
@@ -94,6 +96,7 @@ public class RangedEnemyBehavior : MonoBehaviour
         isDiving = true;
         originalPosition = this.transform.position;
         rb.velocity = new Vector2(0, dirY * enemyData.moveSpeed);
+        transform.eulerAngles = new Vector3(0, 0, -90);
         divingTimer = .5f;
     }
 
@@ -121,7 +124,7 @@ public class RangedEnemyBehavior : MonoBehaviour
 
     public void DecreaseHealth(int damage)
     {
-        currentHealth = currentHealth - damage;
+        currentHealth -= damage;
 
         if (currentHealth <= 0)
         {

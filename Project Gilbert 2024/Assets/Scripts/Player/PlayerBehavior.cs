@@ -35,8 +35,6 @@ public class PlayerBehavior : MonoBehaviour
     public float climbingMoveSpeed;
     public bool isClimbing = false;
     public bool canClimb;
-    public float currentStamina;
-    public float maxStamina;
 
     [Header("Animation")]
     public Animator animator;
@@ -65,7 +63,7 @@ public class PlayerBehavior : MonoBehaviour
         animator = GetComponent<Animator>();
         defaultPosition = rb2d.position;
         defaultGravityScale = rb2d.gravityScale;
-        currentStamina = maxStamina;
+        playerData.currentStamina = playerData.maxStamina;
         Reset();
         
     }
@@ -78,7 +76,7 @@ public class PlayerBehavior : MonoBehaviour
         if (isClimbing)
         {
             rb2d.velocity = new Vector2(horizontal * climbingMoveSpeed, vertical * climbingMoveSpeed);
-            currentStamina -= Time.deltaTime;
+            playerData.currentStamina -= Time.deltaTime;
         }
         else
         {
@@ -92,11 +90,7 @@ public class PlayerBehavior : MonoBehaviour
 
         if(isGrounded)
         {
-            currentStamina = maxStamina;
-            //if(currentStamina < maxStamina)
-            //{
-            //    currentStamina += Time.deltaTime;
-            //}
+            playerData.currentStamina = playerData.maxStamina;
         }
 
     }
@@ -186,7 +180,7 @@ public class PlayerBehavior : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            if (!isClimbing && canClimb && currentStamina > 0)
+            if (!isClimbing && canClimb && playerData.currentStamina > 0)
             {
                 rb2d.gravityScale = 0;
                 rb2d.velocity = Vector2.zero;
@@ -202,9 +196,9 @@ public class PlayerBehavior : MonoBehaviour
         else
             GetComponent<SpriteRenderer>().flipX = false;
 
-        if ((currentStamina < 0 && isClimbing) || !insideClimbingArea)
+        if ((playerData.currentStamina < 0 && isClimbing) || !insideClimbingArea)
         {
-            currentStamina += Time.deltaTime;
+            playerData.currentStamina += Time.deltaTime;
             rb2d.gravityScale = defaultGravityScale;
             isClimbing = false;
             staminaBar.gameObject.SetActive(false);
@@ -212,8 +206,8 @@ public class PlayerBehavior : MonoBehaviour
             animator.SetBool("isClimbing", false);
         }
 
-        staminaBar.value = currentStamina / 100;
-        staminaBar.maxValue = maxStamina / 100;
+        staminaBar.value = playerData.currentStamina / 100;
+        staminaBar.maxValue = playerData.maxStamina / 100;
         #endregion
     }
 
@@ -249,7 +243,6 @@ public class PlayerBehavior : MonoBehaviour
             {
                 canClimb = true;
                 insideClimbingArea = true;
-                Debug.Log("can climb");
             }
         }
     }
@@ -279,7 +272,6 @@ public class PlayerBehavior : MonoBehaviour
                     rb2d.gravityScale = defaultGravityScale;
                     isClimbing = false;
                     animator.SetBool("isClimbing", false);
-                    Debug.Log("cannot climb");
                 }
                 else
                 {
@@ -293,7 +285,6 @@ public class PlayerBehavior : MonoBehaviour
     public void Die()
     {
         rb2d.velocity = Vector2.zero;
-        Debug.Log("Player dead");
     }
 
     // Reset all playerData to default values (maybe should be moved to different higher level class ?)
@@ -307,6 +298,7 @@ public class PlayerBehavior : MonoBehaviour
         playerData.currentLevel = 1;
         HealthComponent.OnAdjustHealth?.Invoke();
         playerData.trashAmount = 0;
+        playerData.maxStamina = 3;
         OnTrashChange?.Invoke();
 
     }

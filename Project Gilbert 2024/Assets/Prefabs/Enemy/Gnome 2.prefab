@@ -134,7 +134,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -163,6 +163,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   enemyData: {fileID: 11400000, guid: 3b02a6605c5a3ba45b2b7c954a9e1328, type: 2}
+  deathSprite: {fileID: 0}
+  isDead: 0
+  rb: {fileID: 0}
+  boxCollider: {fileID: 0}
   trash: {fileID: 910329019547661948, guid: f350e4adca029a442a14f934906f9e72, type: 3}
 --- !u!61 &7400775048970533744
 BoxCollider2D:
