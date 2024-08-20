@@ -11,7 +11,6 @@ public class PlayerBehavior : MonoBehaviour
     private Rigidbody2D rb2d;
     public PlayerData playerData;
     public Slider staminaBar;
-    public bool isInMenu;
 
     // TODO: Link some values below with values in playerData so it's accessible via other classes if necessary
 
@@ -64,7 +63,7 @@ public class PlayerBehavior : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (playerData.isDead || isInMenu) return;
+        if (playerData.isDead) return;
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
 
@@ -101,7 +100,7 @@ public class PlayerBehavior : MonoBehaviour
     void Update()
     {
         // Don't allow movement if player is dead (likely better way to do this to stop update call)
-        if (playerData.isDead || isInMenu) return;
+        if (playerData.isDead) return;
 
         #region Jumping/Falling
         isGrounded = Physics2D.OverlapCircle(feetPos.position, .3f, groundMask);
@@ -302,16 +301,15 @@ public class PlayerBehavior : MonoBehaviour
     public void ResetPlayerData()
     {
         playerData.maxHealth = 3;
-        playerData.currentHealth = 3;
+        playerData.currentHealth = playerData.maxHealth;
+        HealthComponent.OnAdjustHealth?.Invoke();
         playerData.isDead = false;
         playerData.items.Clear();
         playerData.jumpForce = 10;
-        playerData.currentLevel = 1;
-        HealthComponent.OnAdjustHealth?.Invoke();
         playerData.trashAmount = 0;
         playerData.maxStamina = 3;
         OnTrashChange?.Invoke();
-
+        playerData.currentLevel = 1;
     }
 
     void DeathLoop(){
@@ -321,22 +319,14 @@ public class PlayerBehavior : MonoBehaviour
     public void Reset(){
         rb2d.position = defaultPosition;
         animator.SetBool("isDead", false);
-        ResetPlayerData();
     }
 
     public void OnCheckpoint(){
         defaultPosition = rb2d.position;
     }
 
-    public void IncrementLevel()
-    {
-        playerData.currentLevel++;
-        isInMenu = false;
-    }
-
     public void StopPlayer()
     {
-        isInMenu = true;
         rb2d.velocity = Vector2.zero;
     }
 
@@ -345,15 +335,16 @@ public class PlayerBehavior : MonoBehaviour
     {
         HealthComponent.OnDie -= Die;
         BonfireBehavior.OnRest -= StopPlayer;
-        BonfireHUD.OnContinue -= IncrementLevel;
+        HUD.OnReset -= ResetPlayerData;
     }
 
     // Add event listener OnEnable
     public void OnEnable()
     {
+        OnTrashChange?.Invoke();
         HealthComponent.OnDie += Die;
         BonfireBehavior.OnRest += StopPlayer;
-        BonfireHUD.OnContinue += IncrementLevel;
+        HUD.OnReset += ResetPlayerData;
     }
 
 }

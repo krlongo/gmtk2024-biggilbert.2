@@ -40,13 +40,15 @@ public class PlayerItemChange : MonoBehaviour
             {
                 // Treat modifier value as a static integer increase instead of a percentage increase
                 case Stats.Health:
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<HealthComponent>().AdjustMaxHealth((int)modifier.modifierValue);
+                    GetComponent<HealthComponent>().AdjustMaxHealth((int)modifier.modifierValue);
                     break;
                 case Stats.Stamina: 
+                    playerData.maxStamina += (int)modifier.modifierValue;
                     break;
                 case Stats.Damage: 
                     break;
                 case Stats.MovementSpeed:
+                    playerData.movementSpeed += playerData.movementSpeed * modifier.modifierValue;
                     break;
                 case Stats.JumpHeight:
                     playerData.jumpForce += playerData.jumpForce * modifier.modifierValue;
