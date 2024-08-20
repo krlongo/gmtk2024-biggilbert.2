@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -17,8 +18,8 @@ public class DropBullet : MonoBehaviour
 
     void Start()
     {
-        target = GameObject.Find("Player").transform; // initialize target to player
-        self = GameObject.Find("Bird").transform; // initialize self so bird knows what to shoot
+        target = GameObject.Find("Player").transform; // initialize target to 
+        self = gameObject.GetComponentInParent<Transform>().transform; // initialize self so bird knows what to shoot
     }
 
 

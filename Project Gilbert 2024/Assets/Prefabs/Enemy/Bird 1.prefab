@@ -35,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2900975151552553944
 SpriteRenderer:
@@ -115,7 +115,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 6
+  m_Constraints: 4
 --- !u!114 &2838295162253411234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
+  isDead: 0
   moveSpeed: 20
   enemyData: {fileID: 11400000, guid: eb25bb66087eee840822173f8a58307d, type: 2}
   trash: {fileID: 910329019547661948, guid: f350e4adca029a442a14f934906f9e72, type: 3}
@@ -137,6 +138,8 @@ MonoBehaviour:
   isReturning: 0
   divingTimer: 0
   originalPosition: {x: 0, y: 0, z: 0}
+  deathSprite: {fileID: -1300602953, guid: dae52d93dace4bc4dbfbbd6b3bfa9af2, type: 3}
+  boxCollider: {fileID: 445365778071639639}
 --- !u!61 &445365778071639639
 BoxCollider2D:
   m_ObjectHideFlags: 0

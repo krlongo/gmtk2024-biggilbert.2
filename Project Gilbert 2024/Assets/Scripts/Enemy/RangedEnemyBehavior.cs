@@ -9,11 +9,11 @@ using static UnityEngine.GraphicsBuffer;
 public class RangedEnemyBehavior : MonoBehaviour
 {
     public int currentHealth;
+    public bool isDead;
     private float dirX;
     private float dirY;
     private Rigidbody2D rb;
     public float moveSpeed;
-    private bool facingRight = false;
     private Vector3 localScale;
 
     // for enemy data and death
@@ -29,6 +29,9 @@ public class RangedEnemyBehavior : MonoBehaviour
     public float divingTimer;
     public Vector3 originalPosition;
 
+    public Sprite deathSprite;
+
+    public BoxCollider2D boxCollider;
 
     // Start is called before the first frame update
     void Start()
@@ -43,7 +46,7 @@ public class RangedEnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isDiving && ShouldDive())
+        if (!isDiving && ShouldDive() && !isDead)
         {
             Dive();
         }
@@ -51,6 +54,7 @@ public class RangedEnemyBehavior : MonoBehaviour
         {
             isDiving = false;
             isReturning = false;
+            CheckDirection();
         } 
         else if (isDiving && !isReturning && this.transform.position != originalPosition)
         {
@@ -60,6 +64,7 @@ public class RangedEnemyBehavior : MonoBehaviour
         {
             if (CheckDiveTimer())
             {
+                transform.eulerAngles = new Vector3(0, 0, 90);
                 transform.position = Vector3.MoveTowards(transform.position, originalPosition, enemyData.moveSpeed * Time.deltaTime);
             }
             else
@@ -69,15 +74,16 @@ public class RangedEnemyBehavior : MonoBehaviour
         }
         else
         {
-            rb.velocity = new Vector2(dirX * enemyData.moveSpeed, 0);
+            if (!isDead)
+                rb.velocity = new Vector2(dirX * enemyData.moveSpeed, 0);
         }
     }
 
     public bool ShouldDive()
     {
-        if (enemyData.stageLevel == 2 && Math.Abs(this.transform.position.x - GameObject.FindGameObjectWithTag("Player").transform.position.x) < 3
+        if (enemyData.stageLevel == 2 && Math.Abs(this.transform.position.x - GameObject.FindGameObjectWithTag("Player").transform.position.x) < 2
             && this.transform.position.y > GameObject.FindGameObjectWithTag("Player").transform.position.y 
-            && Math.Abs(this.transform.position.y - GameObject.FindGameObjectWithTag("Player").transform.position.y) < 3) 
+            && Math.Abs(this.transform.position.y - GameObject.FindGameObjectWithTag("Player").transform.position.y) < 4) 
         { 
             return true;
         }
@@ -90,6 +96,7 @@ public class RangedEnemyBehavior : MonoBehaviour
         isDiving = true;
         originalPosition = this.transform.position;
         rb.velocity = new Vector2(0, dirY * enemyData.moveSpeed);
+        transform.eulerAngles = new Vector3(0, 0, -90);
         divingTimer = .5f;
     }
 
@@ -111,12 +118,13 @@ public class RangedEnemyBehavior : MonoBehaviour
     {
         currentHealth = enemyData.currentHealth;
         rb.velocity = new Vector2(dirX * enemyData.moveSpeed, 0);
+        isDead = false;
         CheckDirection();
     }
 
     public void DecreaseHealth(int damage)
     {
-        currentHealth = currentHealth - damage;
+        currentHealth -= damage;
 
         if (currentHealth <= 0)
         {
@@ -128,6 +136,19 @@ public class RangedEnemyBehavior : MonoBehaviour
     public void Die()
     {
         Instantiate(trash, gameObject.transform.position, Quaternion.identity);
+        GetComponent<SpriteRenderer>().sprite = deathSprite;
+        GetComponent<Animator>().enabled = false;
+        isDead = true;
+        rb.velocity = Vector2.zero;
+        rb.gravityScale = 10;
+        rb.mass = 1;
+        boxCollider.isTrigger = true;
+        StartCoroutine(DestroySelf(3f));
+    }
+
+    public IEnumerator DestroySelf(float time)
+    {
+        yield return new WaitForSeconds(time);
         Destroy(this.gameObject);
     }
 

@@ -8,7 +8,11 @@ public class EnemyBehavior : MonoBehaviour
 {
     
     public int currentHealth;
-    public EnemyData enemyData; 
+    public EnemyData enemyData;
+    public Sprite deathSprite;
+    public bool isDead;
+    public Rigidbody2D rb;
+    public BoxCollider2D boxCollider;
 
     // Might not be necessary, unsure if any other classes will need to listen for enemy death
     public Action OnDie;
@@ -51,6 +55,19 @@ public class EnemyBehavior : MonoBehaviour
     public void Die()
     {
         Instantiate(trash, gameObject.transform.position, Quaternion.identity);
+        GetComponent<SpriteRenderer>().sprite = deathSprite;
+        GetComponent<Animator>().enabled = false;
+        isDead = true;
+        rb.velocity = Vector2.zero;
+        rb.gravityScale = 10;
+        rb.mass = 1;
+        boxCollider.isTrigger = true;
+        StartCoroutine(DestroySelf(3f));
+    }
+
+    public IEnumerator DestroySelf(float time)
+    {
+        yield return new WaitForSeconds(time);
         Destroy(this.gameObject);
     }
 
@@ -58,7 +75,6 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (collision.collider.GetType() == typeof(BoxCollider2D) && collision.gameObject.CompareTag("Player")) // if enemy hits player
         {
-            Debug.Log("Taking damage");
             collision.gameObject.GetComponent<HealthComponent>().AdjustHealth(-1); // lower health by 1
         }
     }
