@@ -163,8 +163,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  enemyData: {fileID: 11400000, guid: 3b02a6605c5a3ba45b2b7c954a9e1328, type: 2}
-  deathSprite: {fileID: 0}
+  enemyData: {fileID: 11400000, guid: ca970db8c9835e949a116576081fd14e, type: 2}
+  deathSprite: {fileID: -1856654746, guid: 2be6da7425b070f4db958eb434cfb685, type: 3}
   isDead: 0
   rb: {fileID: 128211661351543295}
   boxCollider: {fileID: 7400775048970533744}

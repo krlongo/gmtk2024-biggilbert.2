@@ -24,11 +24,6 @@ public class EnemyBehavior : MonoBehaviour
     // for item drops
     public GameObject trash;
 
-    private void Awake()
-    {
-
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +43,7 @@ public class EnemyBehavior : MonoBehaviour
 
     public void DecreaseHealth(int damage)
     {
-        currentHealth = currentHealth - damage;
+        currentHealth -= damage;
 
         if (currentHealth <= 0)
         {
