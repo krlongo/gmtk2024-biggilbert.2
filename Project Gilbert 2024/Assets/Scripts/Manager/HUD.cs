@@ -35,10 +35,19 @@ public class HUD : MonoBehaviour
         item.itemName = "Tin Can";
         item.description = "Health Up";
         item.modifier = modifier;
+        item.cost = 10;
 
-        playerData.items.Add(item);
-        BonfireBehavior.OnAddItem?.Invoke(item);
-        DisableButtons();
+        if (playerData.trashAmount < item.cost)
+        {
+            Debug.Log("Cannot buy");
+        }
+        else
+        {
+            playerData.items.Add(item);
+            BonfireBehavior.OnAddItem?.Invoke(item);
+            DisableButtons();
+            OnContinue?.Invoke();
+        }
     }
 
     public void AddJumpHeightItem()
@@ -51,10 +60,18 @@ public class HUD : MonoBehaviour
         item.itemName = "Spring Boots";
         item.description = "Jump Height Up";
         item.modifier = modifier;
-        
-        playerData.items.Add(item);
-        BonfireBehavior.OnAddItem?.Invoke(item);
-        DisableButtons();
+        item.cost = 20;
+
+        if (playerData.trashAmount < item.cost)
+        {
+            Debug.Log("Cannot buy");
+        } else
+        {
+            playerData.items.Add(item);
+            BonfireBehavior.OnAddItem?.Invoke(item);
+            DisableButtons();
+            OnContinue?.Invoke();
+        }
     }
 
     public void EnableButtons()

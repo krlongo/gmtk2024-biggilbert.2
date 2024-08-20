@@ -10,6 +10,7 @@ public class PlayerBehavior : MonoBehaviour
     private Rigidbody2D rb2d;
     public PlayerData playerData;
     public Slider staminaBar;
+    public bool isInMenu;
 
     // TODO: Link some values below with values in playerData so it's accessible via other classes if necessary
 
@@ -60,7 +61,7 @@ public class PlayerBehavior : MonoBehaviour
         // player = GameObject.Find("Player");
         // end of powell shit
 
-        rb2d = GetComponent<Rigidbody2D>();
+        rb2d = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         defaultPosition = rb2d.position;
         defaultGravityScale = rb2d.gravityScale;
@@ -70,6 +71,7 @@ public class PlayerBehavior : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (playerData.isDead || isInMenu) return;
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
 
@@ -103,7 +105,7 @@ public class PlayerBehavior : MonoBehaviour
     void Update()
     {
         // Don't allow movement if player is dead (likely better way to do this to stop update call)
-        if (playerData.isDead) return;
+        if (playerData.isDead || isInMenu) return;
 
         #region Jumping/Falling
         isGrounded = Physics2D.OverlapCircle(feetPos.position, .3f, groundMask);
@@ -291,7 +293,6 @@ public class PlayerBehavior : MonoBehaviour
     public void Die()
     {
         rb2d.velocity = Vector2.zero;
-        rb2d.gravityScale = 0;
         Debug.Log("Player dead");
     }
 
@@ -303,6 +304,7 @@ public class PlayerBehavior : MonoBehaviour
         playerData.isDead = false;
         playerData.items.Clear();
         playerData.jumpForce = 10;
+        playerData.currentLevel = 1;
         HealthComponent.OnAdjustHealth?.Invoke();
         playerData.trashAmount = 0;
         OnTrashChange?.Invoke();
@@ -323,16 +325,32 @@ public class PlayerBehavior : MonoBehaviour
         defaultPosition = rb2d.position;
     }
 
+    public void IncrementLevel()
+    {
+        playerData.currentLevel++;
+        isInMenu = false;
+    }
+
+    public void StopPlayer()
+    {
+        isInMenu = true;
+        rb2d.velocity = Vector2.zero;
+    }
+
     // Remove event listener OnDisable
     public void OnDisable()
     {
         HealthComponent.OnDie -= Die;
+        BonfireBehavior.OnRest -= StopPlayer;
+        HUD.OnContinue -= IncrementLevel;
     }
 
     // Add event listener OnEnable
     public void OnEnable()
     {
         HealthComponent.OnDie += Die;
+        BonfireBehavior.OnRest += StopPlayer;
+        HUD.OnContinue += IncrementLevel;
     }
 
 }

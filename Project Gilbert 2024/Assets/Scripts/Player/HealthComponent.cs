@@ -24,7 +24,6 @@ public class HealthComponent : MonoBehaviour
     {
         if (playerData.isInvicible) return;
         playerData.currentHealth += incomingHealth;
-        Debug.Log(playerData.currentHealth); // for testing health being lowered
         if (playerData.currentHealth > playerData.maxHealth)
         {
             playerData.currentHealth = playerData.maxHealth;

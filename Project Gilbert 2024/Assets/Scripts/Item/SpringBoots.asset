@@ -15,3 +15,4 @@ MonoBehaviour:
   itemName: SpringBoots
   description: Jump height increase
   modifier: {fileID: 11400000, guid: da4e242a5c16f3d44b3c43f66fbeed0b, type: 2}
+  cost: 20

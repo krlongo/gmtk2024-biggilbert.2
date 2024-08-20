@@ -45,7 +45,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3970983962428793657, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
       propertyPath: m_TagString
-      value: Ground
+      value: Avalanche!
+      objectReference: {fileID: 0}
+    - target: {fileID: 4941581000054573663, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
+      propertyPath: m_Color.b
+      value: 0.068752214
+      objectReference: {fileID: 0}
+    - target: {fileID: 4941581000054573663, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
+      propertyPath: m_Color.g
+      value: 0.068752214
+      objectReference: {fileID: 0}
+    - target: {fileID: 4941581000054573663, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9716981
       objectReference: {fileID: 0}
     - target: {fileID: 4941581000054573663, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
       propertyPath: m_SortingLayer
@@ -57,23 +69,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7291558067170254831, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7291558067170254831, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 6
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291558067170254831, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7291558067170254831, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.09787318
       objectReference: {fileID: 0}
     - target: {fileID: 7291558067170254831, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -60.01
       objectReference: {fileID: 0}
     - target: {fileID: 7291558067170254831, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5
+      value: 5.16752
       objectReference: {fileID: 0}
     - target: {fileID: 7291558067170254831, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -81,15 +97,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7291558067170254831, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7291558067170254831, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7291558067170254831, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7291558067170254831, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -102,6 +118,10 @@ PrefabInstance:
     - target: {fileID: 7291558067170254831, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8609836794486325113, guid: 3c73851f3efb6e54fab8f3c35f9b5d6a, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -137,10 +157,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e17587572f000f499a50195e7f4cf0e, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: 
-  avalancheData: {fileID: 0}
-  playerData: {fileID: 0}
+  avalancheData: {fileID: 11400000, guid: 89e0ca8f6bbf76047a6241dec76a5aed, type: 2}
+  playerData: {fileID: 11400000, guid: a0b93f7a1d868e344977251b76ecdae9, type: 2}
   doNotRiseUp: 0
   isClimbing: 0
 --- !u!50 &-8977139125840297365
