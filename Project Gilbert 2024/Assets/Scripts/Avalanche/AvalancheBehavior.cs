@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.Tilemaps;
-using UnityEditor.XR;
+//using UnityEditor.Tilemaps;
+//using UnityEditor.XR;
 using UnityEngine;
 using UnityEngine.Events;
 public class AvalancheBehavior : MonoBehaviour

@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.XR;
+//using UnityEditor.XR;
 using UnityEngine;
 using UnityEngine.UI;
-using static Unity.VisualScripting.Member;
+//using static Unity.VisualScripting.Member;
 
 public class PlayerBehavior : MonoBehaviour
 {
