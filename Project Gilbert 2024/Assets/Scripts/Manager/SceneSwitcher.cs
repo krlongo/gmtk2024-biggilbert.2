@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
 {
-
+    public PlayerData playerData;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,13 +22,15 @@ public class SceneSwitcher : MonoBehaviour
     private void OnEnable()
     {
         HUD.OnReset += ResetGame;
-        HUD.OnContinue += NextLevel;
+        BonfireBehavior.OnRest += LoadBonfireHUD;
+        BonfireHUD.OnContinue += NextLevel;
     }
 
     private void OnDisable ()
     {
         HUD.OnReset -= ResetGame;
-        HUD.OnContinue -= NextLevel;
+        BonfireBehavior.OnRest -= LoadBonfireHUD;
+        BonfireHUD.OnContinue -= NextLevel;
     }
 
     public void ResetGame()
@@ -42,21 +44,27 @@ public class SceneSwitcher : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    public void LoadBonfireHUD()
+    {
+        SceneManager.LoadScene("Bonfire");
+    }
+
     public void NextLevel()
     {
+        Debug.Log("NextLevel");
         // TODO: Change with proper scene names
-        switch (SceneManager.GetActiveScene().name)
+        switch (playerData.currentLevel)
         {
-            case "MainMenu":
+            case 0:
                 SceneManager.LoadScene("LevelOne");
                 break;
-            case "LevelOne":
+            case 1:
                 SceneManager.LoadScene("LevelTwo");
                 break;
-            case "LevelTwo":
+            case 2:
                 SceneManager.LoadScene("LevelThree");
                 break;
-            case "LevelThree":
+            case 3:
                 SceneManager.LoadScene("GameWon");
                 break;
         }
