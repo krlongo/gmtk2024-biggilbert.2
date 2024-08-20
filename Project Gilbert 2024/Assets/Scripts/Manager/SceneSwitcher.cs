@@ -46,7 +46,7 @@ public class SceneSwitcher : MonoBehaviour
 
     public void LoadBonfireHUD()
     {
-        if (playerData.currentHealth == 3)
+        if (playerData.currentLevel == 3)
         {
             NextLevel();
         }
