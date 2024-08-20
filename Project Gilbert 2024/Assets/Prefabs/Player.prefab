@@ -401,7 +401,7 @@ Transform:
   - {fileID: 1395058048972475368}
   - {fileID: 4270013149185255172}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3523289937055238798
 SpriteRenderer:
@@ -539,6 +539,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 447593619e965a040806f7922e2e98c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  source: {fileID: 7211256753063431756}
+  Audioclip: {fileID: 8300000, guid: e6308a7795dafe746ab353adf06e11bd, type: 3}
   playerData: {fileID: 11400000, guid: a0b93f7a1d868e344977251b76ecdae9, type: 2}
 --- !u!114 &8320837999321993682
 MonoBehaviour:
@@ -646,7 +648,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 0
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
