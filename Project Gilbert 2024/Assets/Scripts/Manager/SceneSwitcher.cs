@@ -65,7 +65,7 @@ public class SceneSwitcher : MonoBehaviour
                 SceneManager.LoadScene("LevelThree");
                 break;
             case 3:
-                SceneManager.LoadScene("GameWon");
+                SceneManager.LoadScene("Ending");
                 break;
         }
         playerData.currentLevel++;

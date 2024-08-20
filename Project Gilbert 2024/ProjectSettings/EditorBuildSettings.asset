@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Bonfire.unity
     guid: 16722bc3be44f8e4cbd54b03624bbeea
+  - enabled: 1
+    path: Assets/Scenes/Ending.unity
+    guid: cbe30e01f963ca24c92ee0b0849841de
   m_configObjects: {}
