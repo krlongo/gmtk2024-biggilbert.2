@@ -62,6 +62,8 @@ public class AvalancheBehavior : MonoBehaviour
         {
             if(collision.gameObject.CompareTag("Player"))
             {
+                playerData.isInvicible = false;
+                playerData.invicibleTimer = 0;
                 collision.gameObject.GetComponent<HealthComponent>().AdjustHealth(-avalancheData.damage);
             } else if(collision.gameObject.CompareTag("Checkpoint"))
             {

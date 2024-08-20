@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: GnomeLevel3
   m_EditorClassIdentifier: 
   enemyName: Gnome3
-  maxHealth: 1
-  currentHealth: 1
+  maxHealth: 3
+  currentHealth: 3
   damage: 1
-  moveSpeed: 1
+  moveSpeed: 2
   attackSpeed: 1
   stageLevel: 3
