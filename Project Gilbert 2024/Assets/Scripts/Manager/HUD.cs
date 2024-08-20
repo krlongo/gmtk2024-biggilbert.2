@@ -13,6 +13,7 @@ public class HUD : MonoBehaviour
     public TMP_Text trashAmountText;
 
     public Button resetButton;
+    public GameObject deathScreen;
 
     public static Action OnReset;
 
@@ -67,6 +68,7 @@ public class HUD : MonoBehaviour
     {
         UpdateHealth();
         resetButton.gameObject.SetActive(true);
+        deathScreen.SetActive(true);
         Debug.Log("Game Over");
     }
 
@@ -81,5 +83,11 @@ public class HUD : MonoBehaviour
         DisableButtons();
         UpdateHealth();
         UpdateTrashAmount();
+        deathScreen.SetActive(false);
+    }
+
+    public void Quit()
+    {
+       Application.Quit();
     }
 }
