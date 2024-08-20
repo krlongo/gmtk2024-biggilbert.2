@@ -881,7 +881,6 @@ GameObject:
   - component: {fileID: 4710632895420103629}
   - component: {fileID: 5849282091190743297}
   - component: {fileID: 2673671408202171677}
-  - component: {fileID: 1934830594481014985}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -997,8 +996,6 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: a0b93f7a1d868e344977251b76ecdae9, type: 2}
   healthText: {fileID: 5286112008122998917}
   trashAmountText: {fileID: 6220666361254191199}
-  healthIncreaseButton: {fileID: 0}
-  jumpHeightIncreaseButton: {fileID: 0}
   resetButton: {fileID: 166499719491397002}
 --- !u!114 &5849282091190743297
 MonoBehaviour:
@@ -1027,28 +1024,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 5417883027598475017}
   musicClip: {fileID: 8300000, guid: 11b4c60812dcf8e4fa4d53081bc79b9a, type: 3}
---- !u!114 &1934830594481014985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7723908909367450621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02ac389a55674914f9e5d19725f28ecf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: a0b93f7a1d868e344977251b76ecdae9, type: 2}
-  increaseHealth: {fileID: 0}
-  increaseStamina: {fileID: 0}
-  increaseSpeed: {fileID: 0}
-  goatSitting: {fileID: 0}
-  goatSleeping: {fileID: 0}
-  upgradeMenu: {fileID: 0}
-  backgroundImage: {fileID: 0}
-  sleepingTimer: 0
-  isSleeping: 0
 --- !u!1 &8662174843968742634
 GameObject:
   m_ObjectHideFlags: 0
