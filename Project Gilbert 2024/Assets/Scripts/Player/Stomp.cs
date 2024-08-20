@@ -7,6 +7,7 @@ public class Stomp : MonoBehaviour
 {
     public float bounce;
     public Rigidbody2D playerRb;
+    public PlayerData playerData;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +43,7 @@ public class Stomp : MonoBehaviour
                     }
                 }
             }
-            
+            playerData.currentStamina = playerData.maxStamina;
             playerRb.velocity = new Vector2(playerRb.velocity.x, bounce);
         }
     }
