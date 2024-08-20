@@ -29,7 +29,6 @@ public class HealthComponent : MonoBehaviour
 
         if(incomingHealth < 0)
         {
-            Debug.Log("PLAY AUDIO.....................");
             source.clip = Audioclip;
             source.Play();
         }

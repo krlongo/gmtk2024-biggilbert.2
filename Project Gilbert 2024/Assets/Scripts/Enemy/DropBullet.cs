@@ -21,7 +21,7 @@ public class DropBullet : MonoBehaviour
 
     void Start()
     {
-        source.clip = clip;
+        // source.clip = clip;
 
         target = GameObject.Find("Player").transform; // initialize target to 
         self = gameObject.GetComponentInParent<Transform>().transform; // initialize self so bird knows what to shoot
@@ -46,7 +46,7 @@ public class DropBullet : MonoBehaviour
             GameObject projectile = Instantiate(bullet, myPos, Quaternion.identity); //create our bullet where we are
             projectile.GetComponent<Rigidbody2D>().velocity = new Vector3(0,-1,0) * shotPower; //shoot the bullet with according power
             // play audio file attached to bird
-            source.Play();
+            source.PlayOneShot(clip);
         }
     }
 }

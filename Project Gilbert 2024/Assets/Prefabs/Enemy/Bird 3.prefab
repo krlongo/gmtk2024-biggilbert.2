@@ -142,6 +142,8 @@ MonoBehaviour:
   originalPosition: {x: 0, y: 0, z: 0}
   deathSprite: {fileID: -1281635272, guid: d9e69a07dac9c6d4ebaeb75764c64412, type: 3}
   boxCollider: {fileID: 445365778071639639}
+  source: {fileID: 7543349768463460462}
+  deathSound: {fileID: 8300000, guid: b21804a07b4a3b54da4e29264adf4b2f, type: 3}
 --- !u!61 &445365778071639639
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -270,7 +272,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 3e47625c18f56714bbfe79a9a570d453, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.1
   m_Pitch: 1
