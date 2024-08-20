@@ -30,7 +30,7 @@ public class MountainProgressBar : MonoBehaviour
         maxMountainHeight = checkpointObject.transform.position.y;
         totalMountainDistance = Mathf.Abs(maxMountainHeight - startingMountainHeight);
         //totalMountainDistance = maxMountainHeight - startingMountainHeight;
-        playerDistanceToHeight = (maxMountainHeight - objectToTrack.transform.position.y) / maxMountainHeight;
+        playerDistanceToHeight = (maxMountainHeight - objectToTrack.transform.position.y) / totalMountainDistance;
         //avalancheDistanceToHeight = (maxMountainHeight - avalancheObject.transform.position.y) / maxMountainHeight;
         //Debug.Log((playerDistanceToHeight - totalMountainDistance) / totalMountainDistance);
         //playerProgressSprite.gameObject.transform.SetPositionAndRotation(new Vector3(playerProgressSprite.gameObject.transform.position.x, playerDistanceToHeight, 1), Quaternion.identity);
@@ -41,7 +41,7 @@ public class MountainProgressBar : MonoBehaviour
     {
         CalculateMountainHeight();
 
-        ProgressSlider.maxValue = maxMountainHeight;
+        ProgressSlider.maxValue = 1;
         ProgressSlider.value = playerDistanceToHeight;
     }
 }

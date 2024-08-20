@@ -37,11 +37,19 @@ public class SceneSwitcher : MonoBehaviour
         SceneManager.LoadScene("LevelOne");
     }
 
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void NextLevel()
     {
         // TODO: Change with proper scene names
         switch (SceneManager.GetActiveScene().name)
         {
+            case "MainMenu":
+                SceneManager.LoadScene("LevelOne");
+                break;
             case "LevelOne":
                 SceneManager.LoadScene("Level 2 Test");
                 break;
@@ -52,5 +60,10 @@ public class SceneSwitcher : MonoBehaviour
                 SceneManager.LoadScene("GameWon");
                 break;
         }
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
