@@ -54,12 +54,12 @@ public class HUD : MonoBehaviour
 
     private void UpdateHealth()
     {
-        healthText.text = "Health: " + playerData.currentHealth;
+        healthText.text = playerData.currentHealth.ToString();
     }
 
     private void UpdateTrashAmount()
     {
-        trashAmountText.text = "Trash: " + playerData.trashAmount;
+        trashAmountText.text = playerData.trashAmount.ToString();
     }
 
     // TODO: Trigger Game Over screen
