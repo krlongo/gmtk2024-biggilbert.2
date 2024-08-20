@@ -286,6 +286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bounce: 15
   playerRb: {fileID: 6301812809443979587}
+  playerData: {fileID: 11400000, guid: a0b93f7a1d868e344977251b76ecdae9, type: 2}
 --- !u!1 &1062173842797835551
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,6 +553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: a0b93f7a1d868e344977251b76ecdae9, type: 2}
   staminaBar: {fileID: 6021994617104543523}
+  isInMenu: 0
   MoveSpeed: 7
   numOfJumps: 1
   groundMask:
@@ -565,12 +567,10 @@ MonoBehaviour:
   climbingMoveSpeed: 5
   isClimbing: 0
   canClimb: 0
-  currentStamina: 0
-  maxStamina: 3
   animator: {fileID: 0}
   playerAudioSource: {fileID: 0}
-  jumpSFX: {fileID: 0}
-  climbSFX: {fileID: 0}
+  jumpSFX: {fileID: 8300000, guid: 13dc26359aceef240bd03cc01cb9c090, type: 3}
+  climbSFX: {fileID: 8300000, guid: 1e94a1e9053cc7a459c3a60d76349d9b, type: 3}
   onHitSFX: {fileID: 0}
   trashPickupSFX: {fileID: 0}
   insideClimbingArea: 0

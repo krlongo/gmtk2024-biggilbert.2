@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor.XR;
 using UnityEngine;
 using UnityEngine.UI;
+using static Unity.VisualScripting.Member;
 
 public class PlayerBehavior : MonoBehaviour
 {
@@ -48,16 +49,10 @@ public class PlayerBehavior : MonoBehaviour
 
     public static Action OnTrashChange;
 
-    //powell shit
-    // public GameObject player; // access player
-    // end of powell shit
 
     // Start is called before the first frame update
     void Start()
     {
-        // powell shit
-        // player = GameObject.Find("Player");
-        // end of powell shit
 
         rb2d = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -77,7 +72,14 @@ public class PlayerBehavior : MonoBehaviour
         {
             rb2d.velocity = new Vector2(horizontal * climbingMoveSpeed, vertical * climbingMoveSpeed);
             playerData.currentStamina -= Time.deltaTime;
-        }
+
+            // set audio to climbing clip loop -------------------------------------------------------------
+            playerAudioSource.clip = climbSFX; //  set to play climbing audio in audioSource
+            if(!playerAudioSource.isPlaying)
+            {
+                playerAudioSource.Play();
+            }
+        } // --------------------------------------------------------------------------------------------------
         else
         {
             rb2d.velocity = new Vector2(horizontal * MoveSpeed, rb2d.velocity.y);
@@ -123,12 +125,16 @@ public class PlayerBehavior : MonoBehaviour
                 rb2d.velocity = Vector2.zero;
                 rb2d.velocity = Vector2.up * playerData.jumpForce;
                 numOfJumps--;
+                playerAudioSource.clip = jumpSFX; // set audioSource to jump
+                playerAudioSource.Play();
+
             }
             else if (isClimbing)
             {
                 //canClimb = false;
                 isClimbing = false;
                 rb2d.gravityScale = defaultGravityScale;
+                playerAudioSource.Stop();
                 isClimbing = false;
                 rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
                 isJumping = true;
@@ -138,6 +144,8 @@ public class PlayerBehavior : MonoBehaviour
                 rb2d.velocity = Vector2.zero;
                 rb2d.velocity = Vector2.up * playerData.jumpForce;
                 numOfJumps--;
+                playerAudioSource.clip = jumpSFX; // set audioSource to jump
+                playerAudioSource.Play();
             }
         }
 
@@ -170,6 +178,7 @@ public class PlayerBehavior : MonoBehaviour
             {
                 rb2d.gravityScale = defaultGravityScale;
                 isClimbing = false;
+                playerAudioSource.Stop();
                 animator.SetBool("isClimbing", false);
                 rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
                 staminaBar.gameObject.SetActive(false);
@@ -268,6 +277,7 @@ public class PlayerBehavior : MonoBehaviour
                 {
                     canClimb = false;
                     isClimbing = false;
+                    playerAudioSource.Stop();
                     staminaBar.gameObject.SetActive(false);
                     rb2d.gravityScale = defaultGravityScale;
                     isClimbing = false;
