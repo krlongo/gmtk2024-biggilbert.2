@@ -138,7 +138,7 @@ MonoBehaviour:
   isReturning: 0
   divingTimer: 0
   originalPosition: {x: 0, y: 0, z: 0}
-  deathSprite: {fileID: -1300602953, guid: dae52d93dace4bc4dbfbbd6b3bfa9af2, type: 3}
+  deathSprite: {fileID: 87189195, guid: 3195a9c59ec607c429c5992db4b44f7c, type: 3}
   boxCollider: {fileID: 445365778071639639}
 --- !u!61 &445365778071639639
 BoxCollider2D:
@@ -230,7 +230,7 @@ Animator:
   m_GameObject: {fileID: 2564965585731455783}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e26265ffd7f8a874cbe7fe4a4d72780e, type: 2}
+  m_Controller: {fileID: 9100000, guid: e866e7366f2f14d4d9f44093cb624333, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
