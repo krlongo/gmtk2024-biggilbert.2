@@ -5688,6 +5688,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Avalanche!
       objectReference: {fileID: 0}
+    - target: {fileID: 7833031281546057552, guid: 9f2a24b596e7e5646ab18397ab13eb37, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
