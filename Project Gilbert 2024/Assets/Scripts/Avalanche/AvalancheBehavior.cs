@@ -21,6 +21,9 @@ public class AvalancheBehavior : MonoBehaviour
     public bool isClimbing;
     private int waveCnt = -1;
     int skip=15;
+    bool haltBruh= false;
+    //For wave wiggles
+    float[] waveArr = new float[] {2,4,7,9,10,8,6,3,-3,-4,-6,-7,-5,-4,-3};
 
     // Start is called before the first frame update
     void Start()
@@ -32,14 +35,24 @@ public class AvalancheBehavior : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        //For wave wiggles
-        float[] waveArr = new float[] {2,4,7,9,10,8,6,3,-3,-4,-6,-7,-5,-4,-3};
-        
+    {        
+        waveCnt++;
         // Stop avalanche movement if player is dead
         if(!playerData.isDead && !doNotRiseUp)
         {
-            rb2d.velocity = new Vector2(rb2d.velocity.x, 1 * avalancheData.moveSpeed);
+            
+            if (waveCnt < 120){
+                if (rb2d.position.y > -54.5 || haltBruh){ //yeah its hard coded. Sue me.
+                    rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
+                    haltBruh=true;
+
+                } else {
+                    rb2d.velocity = new Vector2(rb2d.velocity.x, 12);
+                }
+           } else {
+
+                rb2d.velocity = new Vector2(rb2d.velocity.x, 1 * avalancheData.moveSpeed);
+            }
         } else { 
             //wave stopped wiggle
             rb2d.gravityScale = 0;
@@ -76,6 +89,9 @@ public class AvalancheBehavior : MonoBehaviour
        // rb2d.velocity = Vector3.zero;
         //rb2d.gravityScale = 0;
         doNotRiseUp=true;
+        haltBruh= false;
+        waveCnt = -1;
+        skip=15;
     }
 
 
