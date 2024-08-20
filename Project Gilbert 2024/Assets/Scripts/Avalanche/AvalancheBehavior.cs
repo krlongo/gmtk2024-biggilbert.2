@@ -19,6 +19,8 @@ public class AvalancheBehavior : MonoBehaviour
 
     [Header("Climbing")]
     public bool isClimbing;
+    private int waveCnt = -1;
+    int skip=0;
 
     // Start is called before the first frame update
     void Start()
@@ -31,10 +33,25 @@ public class AvalancheBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //For wave wiggles
+        float[] waveArr = new float[] {2,4,7,9,10,8,6,3,-3,-4,-6,-7,-5,-4,-3};
+        
         // Stop avalanche movement if player is dead
         if(!playerData.isDead && !doNotRiseUp)
         {
             rb2d.velocity = new Vector2(rb2d.velocity.x, 1 * avalancheData.moveSpeed);
+        } else { 
+            //wave stopped wiggle
+            rb2d.gravityScale = 0;
+            skip++;
+            if (skip < 20){
+                rb2d.velocity = new Vector2(rb2d.velocity.x,rb2d.velocity.x);
+            } else {
+                skip = 0;
+                waveCnt++;
+                float waveNum=waveArr[waveCnt%waveArr.Length];
+                rb2d.velocity = new Vector2(rb2d.velocity.x,waveNum/5);
+            }
         }
     }
 
@@ -46,6 +63,9 @@ public class AvalancheBehavior : MonoBehaviour
             if(collision.gameObject.CompareTag("Player"))
             {
                 collision.gameObject.GetComponent<HealthComponent>().AdjustHealth(-avalancheData.damage);
+            } else if(collision.gameObject.CompareTag("Checkpoint"))
+            {
+                doNotRiseUp = true;
             }
         }
     }
@@ -53,8 +73,8 @@ public class AvalancheBehavior : MonoBehaviour
     // Stop the movement of the avalanche if player is dead
     public void OnDeath()
     {
-        rb2d.velocity = Vector3.zero;
-        rb2d.gravityScale = 0;
+       // rb2d.velocity = Vector3.zero;
+        //rb2d.gravityScale = 0;
     }
 
 
