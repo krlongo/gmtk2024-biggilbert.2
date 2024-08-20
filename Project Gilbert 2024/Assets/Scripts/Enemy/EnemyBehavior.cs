@@ -14,6 +14,10 @@ public class EnemyBehavior : MonoBehaviour
     public Rigidbody2D rb;
     public BoxCollider2D boxCollider;
 
+    // for audio
+    public AudioSource source;
+    public AudioClip deathSound;
+
     // Might not be necessary, unsure if any other classes will need to listen for enemy death
     public Action OnDie;
 
@@ -28,6 +32,7 @@ public class EnemyBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        source.clip = deathSound;
         SetStats();
     }
 
@@ -54,6 +59,7 @@ public class EnemyBehavior : MonoBehaviour
 
     public void Die()
     {
+        source.Play();
         Instantiate(trash, gameObject.transform.position, Quaternion.identity);
         GetComponent<SpriteRenderer>().sprite = deathSprite;
         GetComponent<Animator>().enabled = false;

@@ -31,8 +31,11 @@ public class RangedEnemyBehavior : MonoBehaviour
     public Vector3 originalPosition;
 
     public Sprite deathSprite;
-
     public BoxCollider2D boxCollider;
+
+    // for audio
+    public AudioSource source;
+    public AudioClip deathSound;
 
     // Start is called before the first frame update
     void Start()
@@ -136,6 +139,7 @@ public class RangedEnemyBehavior : MonoBehaviour
 
     public void Die()
     {
+        source.PlayOneShot(deathSound); // play death noise
         Instantiate(trash, gameObject.transform.position, Quaternion.identity);
         GetComponent<SpriteRenderer>().sprite = deathSprite;
         GetComponent<Animator>().enabled = false;
