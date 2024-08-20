@@ -7,6 +7,9 @@ using UnityEngine.Events;
 
 public class HealthComponent : MonoBehaviour
 {
+    public AudioSource source;
+    public AudioClip Audioclip;
+
     public PlayerData playerData;
 
     /**
@@ -23,6 +26,14 @@ public class HealthComponent : MonoBehaviour
     public void AdjustHealth (int incomingHealth)
     {
         if (playerData.isInvicible) return;
+
+        if(incomingHealth < 0)
+        {
+            Debug.Log("PLAY AUDIO.....................");
+            source.clip = Audioclip;
+            source.Play();
+        }
+
         playerData.currentHealth += incomingHealth;
         if (playerData.currentHealth > playerData.maxHealth)
         {
