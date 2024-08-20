@@ -4625,7 +4625,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4512485617926744966, guid: 9f2a24b596e7e5646ab18397ab13eb37, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4512485617926744966, guid: 9f2a24b596e7e5646ab18397ab13eb37, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4678,7 +4678,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 9f2a24b596e7e5646ab18397ab13eb37, type: 3}
 --- !u!1 &1369530834 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 3578208376070287277, guid: 9f2a24b596e7e5646ab18397ab13eb37, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7833031281546057552, guid: 9f2a24b596e7e5646ab18397ab13eb37, type: 3}
   m_PrefabInstance: {fileID: 1369530833}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1385300265
@@ -6036,7 +6036,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7291558067170254831, guid: ffa70c740e210d24f92ced426c4de3b0, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7291558067170254831, guid: ffa70c740e210d24f92ced426c4de3b0, type: 3}
       propertyPath: m_LocalScale.y
