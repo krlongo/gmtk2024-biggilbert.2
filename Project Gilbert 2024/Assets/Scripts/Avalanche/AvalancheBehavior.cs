@@ -20,7 +20,7 @@ public class AvalancheBehavior : MonoBehaviour
     [Header("Climbing")]
     public bool isClimbing;
     private int waveCnt = -1;
-    int skip=0;
+    int skip=15;
 
     // Start is called before the first frame update
     void Start()
@@ -75,6 +75,7 @@ public class AvalancheBehavior : MonoBehaviour
     {
        // rb2d.velocity = Vector3.zero;
         //rb2d.gravityScale = 0;
+        doNotRiseUp=true;
     }
 
 
