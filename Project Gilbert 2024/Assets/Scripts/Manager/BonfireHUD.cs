@@ -78,7 +78,7 @@ public class BonfireHUD : MonoBehaviour
     {
         ItemData item = ScriptableObject.CreateInstance<ItemData>();
         ItemModifier modifier = ScriptableObject.CreateInstance<ItemModifier>();
-        modifier.stat = Stats.JumpHeight;
+        modifier.stat = Stats.Stamina;
         modifier.modifierValue = 1;
 
         item.itemName = "Energy Drink";
