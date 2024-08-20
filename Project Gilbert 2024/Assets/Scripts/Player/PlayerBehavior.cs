@@ -294,6 +294,7 @@ public class PlayerBehavior : MonoBehaviour
 
     public void Die()
     {
+        playerData.currentLevel = 0;
         rb2d.velocity = Vector2.zero;
     }
 
@@ -344,7 +345,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         HealthComponent.OnDie -= Die;
         BonfireBehavior.OnRest -= StopPlayer;
-        HUD.OnContinue -= IncrementLevel;
+        BonfireHUD.OnContinue -= IncrementLevel;
     }
 
     // Add event listener OnEnable
@@ -352,7 +353,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         HealthComponent.OnDie += Die;
         BonfireBehavior.OnRest += StopPlayer;
-        HUD.OnContinue += IncrementLevel;
+        BonfireHUD.OnContinue += IncrementLevel;
     }
 
 }

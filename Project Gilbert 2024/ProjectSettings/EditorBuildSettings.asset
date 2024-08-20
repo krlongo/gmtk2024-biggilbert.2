@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelThree.unity
     guid: 9ddece854b55f9549bf0a8d2a041bf91
+  - enabled: 1
+    path: Assets/Scenes/Bonfire.unity
+    guid: 16722bc3be44f8e4cbd54b03624bbeea
   m_configObjects: {}
