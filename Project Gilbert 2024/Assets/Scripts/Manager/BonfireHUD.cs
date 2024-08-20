@@ -54,6 +54,7 @@ public class BonfireHUD : MonoBehaviour
         }
         else
         {
+            playerData.trashAmount -= item.cost;
             playerData.items.Add(item);
             BonfireBehavior.OnAddItem?.Invoke(item);
             DisableButtons();

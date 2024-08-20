@@ -318,5 +318,49 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6754094121606349868, guid: 9ff8066c1f70cfe4497cfc6aaf1197d8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1559549052569251042}
+    - targetCorrespondingSourceObject: {fileID: 6754094121606349868, guid: 9ff8066c1f70cfe4497cfc6aaf1197d8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1559549052569251041}
   m_SourcePrefab: {fileID: 100100000, guid: 9ff8066c1f70cfe4497cfc6aaf1197d8, type: 3}
+--- !u!1 &1559549052569251040 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6754094121606349868, guid: 9ff8066c1f70cfe4497cfc6aaf1197d8, type: 3}
+  m_PrefabInstance: {fileID: 1559549052569251039}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1559549052569251041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559549052569251040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e83579e0f333654198824ff52e6f3e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: a0b93f7a1d868e344977251b76ecdae9, type: 2}
+--- !u!114 &1559549052569251042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559549052569251040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447593619e965a040806f7922e2e98c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 1559549052569251043}
+  Audioclip: {fileID: 8300000, guid: e6308a7795dafe746ab353adf06e11bd, type: 3}
+  playerData: {fileID: 11400000, guid: a0b93f7a1d868e344977251b76ecdae9, type: 2}
+--- !u!82 &1559549052569251043 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4103086811772500969, guid: 9ff8066c1f70cfe4497cfc6aaf1197d8, type: 3}
+  m_PrefabInstance: {fileID: 1559549052569251039}
+  m_PrefabAsset: {fileID: 0}

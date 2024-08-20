@@ -68,6 +68,7 @@ public class SceneSwitcher : MonoBehaviour
                 SceneManager.LoadScene("GameWon");
                 break;
         }
+        playerData.currentLevel++;
     }
 
     public void QuitGame()

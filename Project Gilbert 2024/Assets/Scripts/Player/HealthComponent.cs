@@ -41,6 +41,7 @@ public class HealthComponent : MonoBehaviour
         OnAdjustHealth?.Invoke();
         if (playerData.currentHealth <= 0)
         {
+            playerData.currentHealth = 0;
             playerData.isDead = true;
             gameObject.GetComponent<PlayerBehavior>().animator.SetBool("isDead", true);
             OnDie?.Invoke();

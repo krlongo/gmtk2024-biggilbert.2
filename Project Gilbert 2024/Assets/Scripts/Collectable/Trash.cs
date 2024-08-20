@@ -11,7 +11,7 @@ public class Trash : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        RandomizeValue();
+        SetValue();
     }
 
     // Update is called once per frame
@@ -36,8 +36,8 @@ public class Trash : MonoBehaviour
         }
     }
 
-    public void RandomizeValue()
+    public void SetValue()
     {
-        value = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehavior>().playerData.currentLevel * Random.Range(1, 5);
+        value = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehavior>().playerData.currentLevel;
     }
 }

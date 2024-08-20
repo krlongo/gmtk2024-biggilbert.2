@@ -27,7 +27,7 @@ public class BonfireBehavior : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Player"))
             {
-                playerData.trashAmount += playerData.currentLevel * 10;
+                playerData.trashAmount += playerData.currentLevel * 3;
                 PlayerBehavior.OnTrashChange?.Invoke();
                 OnRest?.Invoke();
             }
