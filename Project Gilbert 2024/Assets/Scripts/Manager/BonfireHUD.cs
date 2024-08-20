@@ -105,7 +105,7 @@ public class BonfireHUD : MonoBehaviour
         ItemData item = ScriptableObject.CreateInstance<ItemData>();
         ItemModifier modifier = ScriptableObject.CreateInstance<ItemModifier>();
         modifier.stat = Stats.MovementSpeed;
-        modifier.modifierValue = .5f;
+        modifier.modifierValue = .25f;
 
         item.itemName = "Speedy Kicks";
         item.description = "Speed up";
